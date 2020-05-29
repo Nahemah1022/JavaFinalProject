@@ -7,6 +7,8 @@ import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Document;
 
 
 public class Window extends JPanel implements ActionListener {
@@ -22,7 +24,7 @@ public class Window extends JPanel implements ActionListener {
 	public Window() {
 		setLayout(new BorderLayout());
 		
-		editArea = new EditArea();
+		editArea = new EditArea(this);
 		viewArea = new ViewArea();
         JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
         		new ScrollArea(editArea, "Source"),
@@ -31,6 +33,11 @@ public class Window extends JPanel implements ActionListener {
         splitPane.setOneTouchExpandable(true);
         splitPane.setResizeWeight(0.5);
         add(splitPane);
+	}
+	
+	public void passSource(Document document) throws BadLocationException {
+		viewArea.setViewText(document);
+		//document.getText(0, document.getLength())
 	}
 	
     private static void createAndShowGUI() {
