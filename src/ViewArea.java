@@ -40,22 +40,56 @@ public class ViewArea extends JTextPane{
 		
 		s = doc.addStyle("h6", regular);
 		StyleConstants.setFontSize(s, 10);
+
+		s = doc.addStyle("h5", regular);
+		StyleConstants.setFontSize(s, 14);
+		
+		s = doc.addStyle("h4", regular);
+		StyleConstants.setFontSize(s, 18);
+		
+		s = doc.addStyle("h3", regular);
+		StyleConstants.setFontSize(s, 24);
+		
+		s = doc.addStyle("h2", regular);
+		StyleConstants.setFontSize(s, 30);
 		
 		s = doc.addStyle("h1", regular);
-		StyleConstants.setFontSize(s, 30);
+		StyleConstants.setFontSize(s, 36);
 
 		
 	}
 
 	public void setViewText(Document source) throws BadLocationException {
-		StyledDocument doc = getStyledDocument();
 		String str = source.getText(0, source.getLength());
+		StyledDocument doc = getStyledDocument();
 		doc.remove(0, doc.getLength());
-		//doc.insertString(0, str, doc.getStyle("regular"));
+		
         for (int i=0; i < str.length(); i++) {
-        	System.out.println(str.substring(i, i+1));
-        	doc.insertString(doc.getLength(), str.substring(i, i+1), doc.getStyle("italic"));
+        	if(str.charAt(i) == '#') {
+        		int hSize = 0;
+        		while(i < str.length() && str.charAt(i) == '#') {
+        			i++;
+        			hSize++;
+        		}
+        		while(i < str.length()) {
+        			doc.insertString(doc.getLength(), str.substring(i, i+1), doc.getStyle("h" + hSize));
+        			if(str.substring(i, i+1).equals("\n")) {
+        				break;
+        			}
+        			i++;
+        		}
+        	}
+        	else if(i < str.length()-1 && str.substring(i, i+2).equals("* ")) {
+        		i = i+2;
+        		while(i < str.length() && !str.substring(i, i+1).equals("\n")) {
+        			doc.insertString(doc.getLength(), str.substring(i, i+1), doc.getStyle("italic"));
+        			i++;
+        		}
+        		doc.insertString(doc.getLength(), "\n", doc.getStyle("regular"));
+        	}
+        	else {
+        		doc.insertString(doc.getLength(), str.substring(i, i+1), doc.getStyle("regular"));
+        	}
         }
-		//System.out.print(source.getText(0, source.getLength()));
 	}
 }
