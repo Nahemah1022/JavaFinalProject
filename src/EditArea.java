@@ -5,7 +5,6 @@ import javax.swing.JTextPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
-import javax.swing.text.Document;
 
 
 public class EditArea extends JTextPane{
@@ -43,18 +42,5 @@ public class EditArea extends JTextPane{
 			}
 			
 		});
-	}
-	
-	public String updateSource() {
-		return this.getText();
-	}
-	
-	public void setSource() {
-	   /*try {
-		      Document doc = getDocument();
-		      doc.insertString(doc.getLength(), "test", null);
-	   } catch(BadLocationException exc) {
-	      exc.printStackTrace();
-	   }*/
 	}
 }

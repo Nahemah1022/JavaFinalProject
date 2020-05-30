@@ -9,6 +9,8 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
 import javax.swing.text.StyledDocument;
 
+import tokenTag.TokenTag;
+
 public class ViewArea extends JTextPane{
 	
 	private static final long serialVersionUID = 1L;
@@ -16,12 +18,15 @@ public class ViewArea extends JTextPane{
 	public static final int Width = Window.WIDTH/2;
 	public static final int HEIGHT = Window.HEIGHT;
 	
-	ViewArea(){
+	private TokenTag tokenTag;
+	
+	ViewArea(Document source){
 		setFont(new Font("Arial", Font.BOLD, 20));
 		setOpaque(true);
 		setEditable(false);
 		
         StyledDocument doc = getStyledDocument();
+        tokenTag = new TokenTag(doc, "#", "\n");
         addStylesToDocument(doc);
 	}
 	
@@ -63,33 +68,7 @@ public class ViewArea extends JTextPane{
 		String str = source.getText(0, source.getLength());
 		StyledDocument doc = getStyledDocument();
 		doc.remove(0, doc.getLength());
-		
-        for (int i=0; i < str.length(); i++) {
-        	if(str.charAt(i) == '#') {
-        		int hSize = 0;
-        		while(i < str.length() && str.charAt(i) == '#') {
-        			i++;
-        			hSize++;
-        		}
-        		while(i < str.length()) {
-        			doc.insertString(doc.getLength(), str.substring(i, i+1), doc.getStyle("h" + hSize));
-        			if(str.substring(i, i+1).equals("\n")) {
-        				break;
-        			}
-        			i++;
-        		}
-        	}
-        	else if(i < str.length()-1 && str.substring(i, i+2).equals("* ")) {
-        		i = i+2;
-        		while(i < str.length() && !str.substring(i, i+1).equals("\n")) {
-        			doc.insertString(doc.getLength(), str.substring(i, i+1), doc.getStyle("italic"));
-        			i++;
-        		}
-        		doc.insertString(doc.getLength(), "\n", doc.getStyle("regular"));
-        	}
-        	else {
-        		doc.insertString(doc.getLength(), str.substring(i, i+1), doc.getStyle("regular"));
-        	}
-        }
+		doc.insertString(0, str, doc.getStyle("regular"));
+		tokenTag.apply();
 	}
 }

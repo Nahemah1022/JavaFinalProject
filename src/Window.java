@@ -21,11 +21,11 @@ public class Window extends JPanel implements ActionListener {
 	public static final int WIDTH = 1200;
 	public static final int HEIGHT = 800;
 
-	public Window() {
+	public Window() throws BadLocationException {
 		setLayout(new BorderLayout());
 		
 		editArea = new EditArea(this);
-		viewArea = new ViewArea();
+		viewArea = new ViewArea(editArea.getDocument());
         JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
         		new ScrollArea(editArea, "Source"),
         		new ScrollArea(viewArea, "Styled")
@@ -40,7 +40,7 @@ public class Window extends JPanel implements ActionListener {
 		//document.getText(0, document.getLength())
 	}
 	
-    private static void createAndShowGUI() {
+    private static void createAndShowGUI() throws BadLocationException {
         //Create and set up the window.
         JFrame frame = new JFrame(Window.TITLE);
         frame.setSize(Window.WIDTH, Window.HEIGHT);
@@ -59,7 +59,12 @@ public class Window extends JPanel implements ActionListener {
             public void run() {
                 //Turn off metal's use of bold fonts
             	UIManager.put("swing.boldMetal", Boolean.FALSE);
-            	createAndShowGUI();
+            	try {
+					createAndShowGUI();
+				} catch (BadLocationException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             }
         });
 	}
