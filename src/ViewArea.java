@@ -9,7 +9,7 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
 import javax.swing.text.StyledDocument;
 
-import tokenTag.TokenTag;
+import tokenTag.*;
 
 public class ViewArea extends JTextPane{
 	
@@ -18,7 +18,9 @@ public class ViewArea extends JTextPane{
 	public static final int Width = Window.WIDTH/2;
 	public static final int HEIGHT = Window.HEIGHT;
 	
-	private TokenTag tokenTag;
+	private TitleTag title;
+	private BoldTag bold;
+	private ItalicTag italic;
 	
 	ViewArea(Document source){
 		setFont(new Font("Arial", Font.BOLD, 20));
@@ -26,42 +28,20 @@ public class ViewArea extends JTextPane{
 		setEditable(false);
 		
         StyledDocument doc = getStyledDocument();
-        tokenTag = new TokenTag(doc, "#", "\n");
+        title = new TitleTag(doc, "#", "\n");
+        bold = new BoldTag(doc, "*", "*");
+        italic = new ItalicTag(doc, "**", "**");
         addStylesToDocument(doc);
 	}
 	
 	private void addStylesToDocument(StyledDocument doc) {
         Style def = StyleContext.getDefaultStyleContext().
                 getStyle(StyleContext.DEFAULT_STYLE);
-
-		Style regular = doc.addStyle("regular", def);
-		StyleConstants.setFontFamily(def, "SansSerif");
-		
-		Style s = doc.addStyle("italic", regular);
-		StyleConstants.setItalic(s, true);
-		
-		s = doc.addStyle("bold", regular);
-		StyleConstants.setBold(s, true);
-		
-		s = doc.addStyle("h6", regular);
-		StyleConstants.setFontSize(s, 10);
-
-		s = doc.addStyle("h5", regular);
-		StyleConstants.setFontSize(s, 14);
-		
-		s = doc.addStyle("h4", regular);
-		StyleConstants.setFontSize(s, 18);
-		
-		s = doc.addStyle("h3", regular);
-		StyleConstants.setFontSize(s, 24);
-		
-		s = doc.addStyle("h2", regular);
-		StyleConstants.setFontSize(s, 30);
-		
-		s = doc.addStyle("h1", regular);
-		StyleConstants.setFontSize(s, 36);
-
-		
+        StyleConstants.setFontFamily(def, "SansSerif");
+        StyleConstants.setBold(def, false);
+        
+		Style s = doc.addStyle("regular", def);
+		StyleConstants.setBold(s, false);
 	}
 
 	public void setViewText(Document source) throws BadLocationException {
@@ -69,6 +49,9 @@ public class ViewArea extends JTextPane{
 		StyledDocument doc = getStyledDocument();
 		doc.remove(0, doc.getLength());
 		doc.insertString(0, str, doc.getStyle("regular"));
-		tokenTag.apply();
+		
+		title.apply();
+		italic.apply();
+		bold.apply();
 	}
 }
