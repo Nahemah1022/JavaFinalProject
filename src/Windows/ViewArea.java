@@ -1,3 +1,4 @@
+package Windows;
 
 import java.awt.Font;
 
@@ -21,6 +22,10 @@ public class ViewArea extends JTextPane{
 	private TitleTag title;
 	private BoldTag bold;
 	private ItalicTag italic;
+	private HyperLinkTag hyperlink;
+	private MarkdownTag markdown;
+	private CheckboxTag checkbox;
+	private TableTag table;
 	
 	ViewArea(Document source){
 		setFont(new Font("Arial", Font.BOLD, 20));
@@ -31,6 +36,10 @@ public class ViewArea extends JTextPane{
         title = new TitleTag(doc, "#", "\n");
         bold = new BoldTag(doc, "*", "*");
         italic = new ItalicTag(doc, "**", "**");
+        hyperlink = new HyperLinkTag(doc, "[", ")");
+        markdown = new MarkdownTag(doc, "==", "==");
+        checkbox = new CheckboxTag(doc, "- [ ]", "\n");
+        table = new TableTag(doc, "|", "\n");
         addStylesToDocument(doc);
 	}
 	
@@ -53,5 +62,10 @@ public class ViewArea extends JTextPane{
 		title.apply();
 		italic.apply();
 		bold.apply();
+		checkbox.apply();
+		hyperlink.apply();
+		markdown.apply();
+		table.apply();
+		
 	}
 }
