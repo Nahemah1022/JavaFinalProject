@@ -1,3 +1,4 @@
+package window;
 
 import java.awt.Font;
 
@@ -23,9 +24,10 @@ public class ViewArea extends JTextPane{
 	private ItalicTag italic;
 	
 	ViewArea(Document source){
-		setFont(new Font("Arial", Font.BOLD, 20));
+		setFont(new Font(Font.SANS_SERIF, Font.BOLD, 20));
 		setOpaque(true);
 		setEditable(false);
+		this.setContentType("tekst/html");
 		
         StyledDocument doc = getStyledDocument();
         title = new TitleTag(doc, "#", "\n");

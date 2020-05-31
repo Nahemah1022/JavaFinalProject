@@ -1,7 +1,10 @@
+package window;
 import java.awt.Color;
 import java.awt.Font;
 
 import javax.swing.JTextPane;
+import javax.swing.event.CaretEvent;
+import javax.swing.event.CaretListener;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
@@ -12,13 +15,16 @@ public class EditArea extends JTextPane{
 	private static final long serialVersionUID = 1L;
 	
 	public static final int Width = Window.WIDTH/2;
-	public static final int HEIGHT = Window.HEIGHT;
+	public static final int HEIGHT = Window.HEIGHT-200;
 	private Window window;
 	
 	public EditArea(Window window) {
 		this.window = window;
-		setFont(new Font("SANS_SERIF", Font.PLAIN, 20));
-		setBackground(Color.WHITE);
+		setFont(new Font("Arial", Font.PLAIN, 20));
+		setBackground(new Color(30, 33, 38));
+		setForeground(Color.WHITE);
+		setCaretColor(Color.WHITE);
+		
 		getDocument().addDocumentListener(new DocumentListener() {
 
 			@Override
