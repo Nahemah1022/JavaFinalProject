@@ -1,4 +1,5 @@
-package Windows;
+package window;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 
@@ -15,9 +16,11 @@ public class ScrollArea extends JScrollPane{
 		minSize = new Dimension(100, 10);
         setPreferredSize(new Dimension(Window.WIDTH/2, Window.HEIGHT));
         setMinimumSize(minSize);
-        setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createTitledBorder(title),
-                BorderFactory.createEmptyBorder(0,0,0,0))
-        );
+        setBorder(BorderFactory.createEmptyBorder(5, 10, 0, 10));
+        if(title.equals("Source"))
+        	this.setBackground(new Color(30, 33, 38));
+        else
+        	this.setBackground(Color.white);
+        //setBorder(BorderFactory.createLoweredBevelBorder());
 	}
 }

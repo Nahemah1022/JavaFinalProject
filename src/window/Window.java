@@ -1,8 +1,12 @@
-package Windows;
+package window;
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
+import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
@@ -16,19 +20,30 @@ public class Window extends JPanel implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 	
-	private EditArea editArea;
 	private ViewArea viewArea;
+	private JPanel leftArea;
+	private EditArea editArea;
+	private ToolBar toolBar;
 	private static final String TITLE = "Notability";
+	
+	public static JFrame FRAME;
+	public static final Dimension SCREEN_SIZE = Toolkit.getDefaultToolkit().getScreenSize();
 	public static final int WIDTH = 1200;
 	public static final int HEIGHT = 800;
 
-	public Window() throws BadLocationException {
+	public Window() throws BadLocationException, IOException {
 		setLayout(new BorderLayout());
 		
+		leftArea = new JPanel();
+		leftArea.setLayout(new BoxLayout(leftArea, BoxLayout.Y_AXIS));
 		editArea = new EditArea(this);
+		toolBar = new ToolBar(editArea);
+		leftArea.add(toolBar);
+		leftArea.add(new ScrollArea(editArea, "Source"));
+		
 		viewArea = new ViewArea(editArea.getDocument());
         JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
-        		new ScrollArea(editArea, "Source"),
+        		leftArea,
         		new ScrollArea(viewArea, "Styled")
         );
         splitPane.setOneTouchExpandable(true);
@@ -41,18 +56,18 @@ public class Window extends JPanel implements ActionListener {
 		//document.getText(0, document.getLength())
 	}
 	
-    private static void createAndShowGUI() throws BadLocationException {
+    private static void createAndShowGUI() throws BadLocationException, IOException {
         //Create and set up the window.
-        JFrame frame = new JFrame(Window.TITLE);
-        frame.setSize(Window.WIDTH, Window.HEIGHT);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    	FRAME = new JFrame(Window.TITLE);
+        FRAME.setSize(Window.WIDTH, Window.HEIGHT);
+        FRAME.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //Add content to the window.
-        frame.add(new Window());
+        FRAME.add(new Window());
 
         //Display the window.
-        frame.pack();
-        frame.setVisible(true);
+        FRAME.pack();
+        FRAME.setVisible(true);
     }
 	
 	public static void main(String[] args) {
@@ -63,6 +78,9 @@ public class Window extends JPanel implements ActionListener {
             	try {
 					createAndShowGUI();
 				} catch (BadLocationException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
