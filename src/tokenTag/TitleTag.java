@@ -40,7 +40,7 @@ public class TitleTag extends TokenTag {
 				i=str.indexOf(this.startToken, j+1), j=str.indexOf(this.endToken, i+1)) {
 			doc.setCharacterAttributes(i, j-i+1, this.doc.getStyle("h1"), true);
 			doc.remove(i, this.startToken.length());
-			if(this.endToken != "\n") 
+			if(this.endToken.equals("\n") == false) 
 				doc.remove(j-this.startToken.length(), this.endToken.length());
 			str = this.doc.getText(0, this.doc.getLength());
 		}
