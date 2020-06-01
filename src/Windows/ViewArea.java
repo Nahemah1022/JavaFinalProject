@@ -39,7 +39,7 @@ public class ViewArea extends JTextPane{
         hyperlink = new HyperLinkTag(doc, "[", ")");
         markdown = new MarkdownTag(doc, "==", "==");
         checkbox = new CheckboxTag(doc, "- [ ]", "\n");
-        table = new TableTag(doc, "|", "\n");
+        table = new TableTag(doc, "|", "-|\n");
         addStylesToDocument(doc);
 	}
 	
