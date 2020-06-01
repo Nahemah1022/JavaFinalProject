@@ -1,5 +1,7 @@
 
+import java.awt.Color;
 import java.awt.Font;
+import javax.swing.JLabel;
 
 import javax.swing.JTextPane;
 import javax.swing.text.BadLocationException;
@@ -21,9 +23,15 @@ public class ViewArea extends JTextPane{
 	private TitleTag title;
 	private BoldTag bold;
 	private ItalicTag italic;
+	private UnderlineTag underline;
+	private Quote quote;
+	private Comment comment;
+	private Irregular_Order f_irregular;
+	private Irr_Order s_irregular;
+	private UnderLabel Ulabel;
 	
 	ViewArea(Document source){
-		setFont(new Font("Arial", Font.BOLD, 20));
+		setFont(new Font("Arial", Font.BOLD, 20));    //¥k°¼§e²{¦r
 		setOpaque(true);
 		setEditable(false);
 		
@@ -31,6 +39,12 @@ public class ViewArea extends JTextPane{
         title = new TitleTag(doc, "#", "\n");
         bold = new BoldTag(doc, "*", "*");
         italic = new ItalicTag(doc, "**", "**");
+        underline = new UnderlineTag(doc, "_","_");
+        quote = new Quote(doc, ">","\n");
+        comment = new Comment(doc,"//","\n");
+        s_irregular = new Irr_Order(doc,"	- ","\n");
+        f_irregular = new Irregular_Order(doc,"- ","\n");    
+        Ulabel = new UnderLabel(doc,"~","~");
         addStylesToDocument(doc);
 	}
 	
@@ -53,5 +67,12 @@ public class ViewArea extends JTextPane{
 		title.apply();
 		italic.apply();
 		bold.apply();
+		underline.apply();
+		quote.apply();
+		comment.apply();
+		s_irregular.apply();
+		f_irregular.apply();
+		Ulabel.apply();
+		
 	}
 }
