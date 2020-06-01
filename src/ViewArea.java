@@ -1,6 +1,9 @@
 
+import java.awt.Color;
 import java.awt.Font;
 
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JTextPane;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
@@ -9,6 +12,9 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
 import javax.swing.text.StyledDocument;
 
+import com.sun.javafx.css.Stylesheet;
+
+import jdk.internal.org.objectweb.asm.Label;
 import tokenTag.*;
 
 public class ViewArea extends JTextPane{
@@ -21,6 +27,12 @@ public class ViewArea extends JTextPane{
 	private TitleTag title;
 	private BoldTag bold;
 	private ItalicTag italic;
+	private StrikeTag strike;
+	private ImageTag image;
+	private FontTag font;
+	private WarningTag warning;
+	
+	JLabel label;
 	
 	ViewArea(Document source){
 		setFont(new Font("Arial", Font.BOLD, 20));
@@ -31,7 +43,17 @@ public class ViewArea extends JTextPane{
         title = new TitleTag(doc, "#", "\n");
         bold = new BoldTag(doc, "*", "*");
         italic = new ItalicTag(doc, "**", "**");
+        strike = new StrikeTag(doc, "~~", "~~");
+        image = new ImageTag(doc, "![","]","(",")") ;
+        font = new FontTag(doc, "$$", "$$");
+        warning = new WarningTag(doc, ":::info", ":::");
         addStylesToDocument(doc);
+        
+        /*label = new JLabel("hello        world");
+		label.setBounds(0,-80,700,200);
+		label.setOpaque(true);
+		label.setBackground(Color.CYAN);
+	    add(label);*/
 	}
 	
 	private void addStylesToDocument(StyledDocument doc) {
@@ -53,5 +75,10 @@ public class ViewArea extends JTextPane{
 		title.apply();
 		italic.apply();
 		bold.apply();
+		strike.apply();
+		image.apply();
+		font.apply();
+		warning.apply();
+
 	}
 }
