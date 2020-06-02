@@ -26,12 +26,12 @@ public class EditArea extends JTextPane {
 		getDocument().addDocumentListener(new DocumentListener() {
 
 			@Override
-			public void insertUpdate(DocumentEvent e) {
+			public void insertUpdate(DocumentEvent e) {    //這裡是右側會隨左側變化處
 				changedUpdate(e);
 			}
 
 			@Override
-			public void removeUpdate(DocumentEvent e) {
+			public void removeUpdate(DocumentEvent e) {    //這裡是右側隨座側刪減處
 				changedUpdate(e);
 			}
 
