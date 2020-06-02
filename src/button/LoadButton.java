@@ -10,6 +10,7 @@ import javax.swing.JFileChooser;
 import javax.swing.text.BadLocationException;
 
 import window.EditArea;
+import window.Menu;
 
 public class LoadButton extends Button {
 
@@ -22,7 +23,7 @@ public class LoadButton extends Button {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 			    JFileChooser chooser = new JFileChooser();
-			    chooser.setCurrentDirectory(new java.io.File("."));
+			    chooser.setCurrentDirectory(new java.io.File(Menu.workspacePath.equals("") ? "." : Menu.workspacePath));
 			    chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
 			    chooser.setDialogTitle("Import Note");
 			    int returnVal = chooser.showOpenDialog(source);

@@ -1,11 +1,16 @@
 package window;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
@@ -17,6 +22,9 @@ import javax.swing.UIManager;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 
+import button.HighlightButton;
+import button.TagButton;
+
 
 public class Window extends JPanel implements ActionListener {
 
@@ -24,6 +32,7 @@ public class Window extends JPanel implements ActionListener {
 	
 	private ViewArea viewArea;
 	private JPanel leftArea;
+	private JPanel rightArea;
 	private EditArea editArea;
 	private ToolBar toolBar;
 	private JLayeredPane muneContainer;
@@ -55,10 +64,19 @@ public class Window extends JPanel implements ActionListener {
 		muneContainer.setLayer(leftArea, 100);
 		menuShowing = true;
 		
-		viewArea = new ViewArea(editArea.getDocument());
+		viewArea = new ViewArea(editArea);
+		rightArea = new JPanel();
+		rightArea.setLayout(new BoxLayout(rightArea, BoxLayout.Y_AXIS));
+		rightArea.setBorder(BorderFactory.createLoweredSoftBevelBorder());
+		rightArea.add(new ScrollArea(viewArea, "Styled"));
+		JPanel footer = new JPanel();
+		footer.add(new HighlightButton("/images/highlighter.png", editArea, viewArea));
+		footer.setBackground(Color.white);
+		footer.setLayout(new FlowLayout(FlowLayout.RIGHT));
+		rightArea.add(footer);
         JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
         		new JScrollPane(muneContainer),
-        		new ScrollArea(viewArea, "Styled")
+        		rightArea
         );
         splitPane.setOneTouchExpandable(true);
         splitPane.setResizeWeight(0.5);

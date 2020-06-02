@@ -29,7 +29,7 @@ public class MarkdownTag extends TokenTag {
 			//System.out.println("i=" + i);
 			//System.out.println("j=" + j);
 			subnum = 0;
-			doc.setCharacterAttributes(i, j-i+1, this.doc.getStyle("markdown"), true);
+			doc.setCharacterAttributes(i, j-i+1, this.doc.getStyle("markdown"), false);
 			doc.remove(i, this.startToken.length());
 			subnum += this.startToken.length();
 			//doc.remove(j, this.endToken.length());

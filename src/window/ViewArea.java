@@ -1,6 +1,7 @@
 package window;
 
 import java.awt.Font;
+import java.io.IOException;
 
 import javax.swing.JTextPane;
 import javax.swing.text.BadLocationException;
@@ -10,9 +11,10 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
 import javax.swing.text.StyledDocument;
 
+import button.TagButton;
 import tokenTag.*;
 
-public class ViewArea extends JTextPane{
+public class ViewArea extends JTextPane {
 	
 	private static final long serialVersionUID = 1L;
 
@@ -34,11 +36,11 @@ public class ViewArea extends JTextPane{
 	private Irr_Order s_irregular;
 	private UnderLabel Ulabel;
 	
-	ViewArea(Document source){
-		setFont(new Font("Arial", Font.BOLD, 20));    //¥k°¼§e²{¦r
+	ViewArea(EditArea editArea) throws IOException{
+		setFont(new Font("Arial", Font.BOLD, 20));
 		setOpaque(true);
 		setEditable(false);
-		this.setContentType("tekst/html");
+		setContentType("tekst/html");
 		
         StyledDocument doc = getStyledDocument();
         title = new TitleTag(doc, "#", "\n");
@@ -69,6 +71,7 @@ public class ViewArea extends JTextPane{
 	public void setViewText(Document source) throws BadLocationException {
 		String str = source.getText(0, source.getLength());
 		StyledDocument doc = getStyledDocument();
+		//System.out.println(str.length() - doc.getLength());
 		doc.remove(0, doc.getLength());
 		doc.insertString(0, str, doc.getStyle("regular"));
 		

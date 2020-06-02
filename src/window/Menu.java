@@ -22,6 +22,7 @@ import javax.swing.JPanel;
 import button.DirButton;
 import button.FileButton;
 import button.MenuButton;
+import button.NewFileButton;
 
 public class Menu extends JPanel {
 
@@ -35,8 +36,11 @@ public class Menu extends JPanel {
 	private ArrayList<File> files;
 	private ArrayList<JButton> buttons;
 	private GridBagConstraints c;
+	private EditArea source;
+	private Menu m;
 
 	public Menu(EditArea source) throws IOException {
+		this.source = source;
 		setBounds(new Rectangle(0, 0, Window.FRAME.getSize().width/6, 900));
 		setLayout(new GridBagLayout());
 		setBorder(BorderFactory.createRaisedBevelBorder());
@@ -63,7 +67,7 @@ public class Menu extends JPanel {
 		title.setFont(new Font("Arial", Font.BOLD, 20));
 		add(title, c);
 		setGridWidth();
-
+		m = this;
 		hasWorkspace = false;
 		if(!hasWorkspace) {
 			JButton open = new JButton("Open Workspace");
@@ -106,6 +110,13 @@ public class Menu extends JPanel {
 							}
 
 				    	}
+				    	try {
+				    		c.gridy++;
+							add(new NewFileButton("New File", source, m), c);
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 				    	warning.setVisible(false);
 				    	open.setVisible(false);
 				    }
@@ -113,6 +124,16 @@ public class Menu extends JPanel {
 				}
 			});
 		}
+	}
+	
+	public void addOneFile() {
+    	try {
+    		c.gridy++;
+			add(new NewFileButton("New File", source, m), c);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}		
 	}
 	
 	private void setWarning(JButton open) {

@@ -24,7 +24,7 @@ public class SaveButton extends Button {
 			public void actionPerformed(ActionEvent e) {
 				if(Menu.editingFileName.equals("")) {
 				    JFileChooser chooser = new JFileChooser();
-				    chooser.setCurrentDirectory(new java.io.File("."));
+				    chooser.setCurrentDirectory(new java.io.File(Menu.workspacePath.equals("") ? "." : Menu.workspacePath));
 				    chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
 				    chooser.setDialogTitle("Save Note");
 				    chooser.setDialogType(JFileChooser.SAVE_DIALOG);
@@ -52,6 +52,7 @@ public class SaveButton extends Button {
 					try {
 						writer = new FileWriter(file);
 			    		writer.write(source.getDocument().getText(0, source.getDocument().getLength()));
+			    		System.out.println(source.getDocument().getText(0, source.getDocument().getLength()));
 			    	    writer.flush();
 			    	    writer.close();
 					} catch (IOException e1) {

@@ -29,6 +29,8 @@ public class ToolBar extends JPanel {
 	private JButton checkbox;
 	private JButton link;
 	private JButton image;
+	private JButton list;
+	private JButton quote;
 	private SaveButton saver;
 	private LoadButton loader;
 	private MenuButton menuButton;
@@ -48,7 +50,7 @@ public class ToolBar extends JPanel {
 		fileSection.setPreferredSize(new Dimension(Window.FRAME.getSize().width/3, 40));
 		fileSection.setSize(new Dimension(Window.WIDTH/6, 40));
 		tagSection = new JPanel();
-		tagSection.setLayout(new GridLayout(0, 6));
+		tagSection.setLayout(new GridLayout(0, 8));
 		tagSection.setBackground(new Color(28, 28, 30));
 		tagSection.setPreferredSize(new Dimension(Window.FRAME.getSize().width*2/3, 40));
 		add(fileSection);
@@ -60,6 +62,8 @@ public class ToolBar extends JPanel {
 		checkbox = new TagButton("/images/checkbox.png", source, "- [ ]", "\n");
 		link = new TagButton("/images/link.png", source, "[](", ")");
 		image = new TagButton("/images/image.png", source, "![](", ")");
+		list = new TagButton("/images/list.png", source, "- ", "\n");
+		quote = new TagButton("/images/quote.png", source, "> ","\n");
 		saver = new SaveButton("/images/save.png", source);
 		loader = new LoadButton("/images/load.png", source);
 		menuButton = new MenuButton("/images/menu.png", source);
@@ -74,6 +78,8 @@ public class ToolBar extends JPanel {
 		tagSection.add(checkbox);
 		tagSection.add(link);
 		tagSection.add(image);
+		tagSection.add(list);
+		tagSection.add(quote);
 	}
 	
 	public void toggleFileSection() {
