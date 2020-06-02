@@ -1,5 +1,8 @@
 package tokenTag;
 
+import java.awt.Color;
+import java.awt.Dimension;
+
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.text.BadLocationException;
@@ -49,10 +52,16 @@ public class ImageTag extends TokenTag {
 			if(this.path_end_token != "\n") 
 				doc.remove(i+img_txt.length()+path.length(), this.path_end_token.length());
 			
-			str = this.doc.getText(0, this.doc.getLength());
+			//StyleConstants.setIcon(s, new ImageIcon(path));
 			
-			StyleConstants.setIcon(s, new ImageIcon(path));
-		   
+			JLabel label = new JLabel(new ImageIcon(path));
+			StyleConstants.setComponent(s, label);
+			
+			doc.remove(i, img_txt.length()-1);
+			doc.remove(i, path.length()-1);
+			str = this.doc.getText(0, this.doc.getLength());
+			System.out.println(str);
+			
 		}
 	}
 }
