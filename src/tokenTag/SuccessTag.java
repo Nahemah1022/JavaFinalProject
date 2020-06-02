@@ -20,10 +20,11 @@ public class SuccessTag extends TokenTag{
 	}
 	
 	public void apply() throws BadLocationException {
+		int subnum = 0;
 		String str = this.doc.getText(0, this.doc.getLength());
 		for(int i=str.indexOf(this.startToken), j=str.indexOf(this.endToken, i+1); 
 				i!=-1 && j!=-1; 
-				i=str.indexOf(this.startToken, j+1), j=str.indexOf(this.endToken, i+1)) {
+				i=str.indexOf(this.startToken, j+1-subnum), j=str.indexOf(this.endToken, i+1)) {
 			doc.setCharacterAttributes(i, j-i+1, this.doc.getStyle("success"), true);
 			
 			System.out.println(i+" "+j);
@@ -44,9 +45,13 @@ public class SuccessTag extends TokenTag{
 			System.out.println(result);
 			
 			System.out.println("end: "+this.endToken);
+			subnum += this.startToken.length();
 			doc.remove(i, this.startToken.length());
-			if(this.endToken != null) 
+			if(this.endToken != null) {
 				doc.remove(j-this.startToken.length(), this.endToken.length());
+				subnum += this.endToken.length();
+			}
+				
 			//doc.remove(i, content.length());
 			
 			JLabel label = new JLabel();
@@ -54,9 +59,12 @@ public class SuccessTag extends TokenTag{
 			label.setBackground(new Color(220,245,200));
 			label.setOpaque(true);
 			label.setFont (label.getFont().deriveFont (22.0f));
+			label.setForeground(new Color(166,186,128));
+			//label.setBorder(new RoundedBorder(new Color(50, 50, 50), 30));
 			label.setText(result);
 			StyleConstants.setComponent(w, label);
 			
+			subnum += content.length()-1;
 			doc.remove(i, content.length()-1);
 			str = this.doc.getText(0, this.doc.getLength());
 		}

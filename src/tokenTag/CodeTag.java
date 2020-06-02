@@ -21,11 +21,12 @@ public class CodeTag extends TokenTag{
 	
 	public void apply() throws BadLocationException {
 		String str = this.doc.getText(0, this.doc.getLength());
+		int subnum = 0;
 		for(int i=str.indexOf(this.startToken), j=str.indexOf(this.endToken, i+1); 
 				i!=-1 && j!=-1; 
-				i=str.indexOf(this.startToken, j+1), j=str.indexOf(this.endToken, i+1)) {
+				i=str.indexOf(this.startToken, j+1-subnum), j=str.indexOf(this.endToken, i+1)) {
 			doc.setCharacterAttributes(i, j-i+1, this.doc.getStyle("code"), true);
-			
+			subnum = 0;
 			System.out.println(i+" "+j);
 			String content = this.doc.getText(i+this.startToken.length(), j-i-this.startToken.length());
 			System.out.println(content);
@@ -45,11 +46,14 @@ public class CodeTag extends TokenTag{
 			
 			System.out.println("end: "+this.endToken);
 			doc.remove(i, this.startToken.length());
-			if(this.endToken != null) 
+			subnum += this.startToken.length();
+			if(this.endToken != null) {
 				doc.remove(j-this.startToken.length(), this.endToken.length());
+				subnum += this.endToken.length();
+			}
 			
 			JLabel label = new JLabel();
-			label.setPreferredSize(new Dimension(100, 50*newline_count));
+			label.setPreferredSize(new Dimension(100, 50*(newline_count+1)));
 			label.setBackground(Color.BLACK);
 			label.setForeground(Color.WHITE);
 			label.setOpaque(true);

@@ -14,14 +14,51 @@ import javax.swing.text.StyledDocument;
 public class ImageTag extends TokenTag {
 	Style def = StyleContext.getDefaultStyleContext().getStyle(StyleContext.DEFAULT_STYLE);
 	Style s = doc.addStyle("image", def);
-	JLabel label;
-	
+	//JLabel label;
+	/*
 	public ImageTag(StyledDocument target, String start, String end,String path_start, String path_end) {
 		super(target, start, end);
 		super.path_start_token = path_start;
 		super.path_end_token = path_end;
+	}*/
+	Style t = doc.addStyle("imagetex", def);
+	
+	public ImageTag(StyledDocument target, String start, String end) {
+		super(target, start, end);
 	}
 	
+	@Override
+	public void apply() throws BadLocationException {
+		String str = this.doc.getText(0, this.doc.getLength());
+		String nameString = str;
+		String pathString;
+		int subnum = 0;
+		//System.out.println(nameString);
+		for(int i=str.indexOf(this.startToken), j=str.indexOf(this.endToken, i+1); 
+				i!=-1 && j!=-1; 
+				i=str.indexOf(this.startToken, j+1-subnum), j=str.indexOf(this.endToken, i+1)) {
+			System.out.println(str);
+			subnum = 0;
+			nameString = str.substring(i+1, str.indexOf("]", i+1));
+			System.out.println(nameString);
+			pathString = str.substring(str.indexOf("]", i+1)+2, j);
+			System.out.println(pathString);
+			JLabel label = new JLabel(new ImageIcon(pathString));
+			StyleConstants.setComponent(s, label);
+			//HyperlinkDemo(nameString, pathString);
+			doc.setCharacterAttributes(i, j-i+1, this.doc.getStyle("image"), true);
+			doc.remove(i, this.startToken.length());
+			subnum += this.startToken.length();
+			if(this.endToken.equals("\n") == false) {
+				doc.remove(j-this.startToken.length(), this.endToken.length());
+				subnum += this.endToken.length();
+			} 
+				
+			str = this.doc.getText(0, this.doc.getLength());
+		}
+	}
+	
+	/*
 	@Override
 	public void apply() throws BadLocationException {
 		String str = this.doc.getText(0, this.doc.getLength());
@@ -63,5 +100,5 @@ public class ImageTag extends TokenTag {
 			System.out.println(str);
 			
 		}
-	}
+	}*/
 }

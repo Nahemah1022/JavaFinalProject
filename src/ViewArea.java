@@ -14,9 +14,9 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
 import javax.swing.text.StyledDocument;
 
-import com.sun.javafx.css.Stylesheet;
+//import com.sun.javafx.css.Stylesheet;
 
-import jdk.internal.org.objectweb.asm.Label;
+//import jdk.internal.org.objectweb.asm.Label;
 import tokenTag.*;
 
 public class ViewArea extends JTextPane{
@@ -50,8 +50,10 @@ public class ViewArea extends JTextPane{
         bold = new BoldTag(doc, "*", "*");
         italic = new ItalicTag(doc, "**", "**");
         strike = new StrikeTag(doc, "~~", "~~");
-        image = new ImageTag(doc, "![","]","(",")") ;
+        image = new ImageTag(doc, "![", ")") ;
+        //image = new ImageTag(doc, "![","]","(",")") ;
         font = new FontTag(doc, "$$", "$$");
+        //warning = new WarningTag(doc, ":::warning", ":::");
         warning = new WarningTag(doc, ":::warning\n", "\n:::");
         info = new InfoTag(doc,":::info\n","\n:::");
         success = new SuccessTag(doc, ":::success\n", "\n:::");
