@@ -38,7 +38,7 @@ public class FileButton extends JButton {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				Menu.editingFileName = file.getName();
 				try {
 					String content = new String ( Files.readAllBytes( Paths.get(Menu.workspacePath + "\\" + file.getName()) ));
 					source.getDocument().remove(0, source.getDocument().getLength());

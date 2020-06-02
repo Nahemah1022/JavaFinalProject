@@ -27,13 +27,15 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import button.DirButton;
 import button.FileButton;
 import button.MenuButton;
 
 public class Menu extends JPanel {
 
 	public boolean hasWorkspace;
-	public static String workspacePath;
+	public static String workspacePath = "";
+	public static String editingFileName = "";
 	
 	private static final long serialVersionUID = 1L;
 	private JButton[] baseButtons;
@@ -88,7 +90,15 @@ public class Menu extends JPanel {
 						c.gridx = 0;
 						c.ipady = 2;
 						workspacePath = chooser.getSelectedFile().getPath().replace("/", "\\");
-				    	File folder = new File(chooser.getSelectedFile().getPath().replace("/", "\\"));
+						try {
+							add(new DirButton(workspacePath), c);
+						} catch (IOException e2) {
+							// TODO Auto-generated catch block
+							e2.printStackTrace();
+						}
+						c.gridwidth = 5;
+						c.gridx = 1;
+						File folder = new File(chooser.getSelectedFile().getPath().replace("/", "\\"));
 				    	File[] listOfFiles = folder.listFiles();
 				    	for (int i = 0; i < listOfFiles.length; i++) {
 							if (listOfFiles[i].isFile() && listOfFiles[i].getName().endsWith(".txt")) {
