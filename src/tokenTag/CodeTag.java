@@ -47,7 +47,7 @@ public class CodeTag extends TokenTag{
 			doc.remove(i, this.startToken.length());
 			if(this.endToken != null) 
 				doc.remove(j-this.startToken.length(), this.endToken.length());
-			//doc.remove(i, content.length());
+			
 			
 			JLabel label = new JLabel();
 			label.setPreferredSize(new Dimension(100, 50*newline_count));
@@ -58,7 +58,7 @@ public class CodeTag extends TokenTag{
 			label.setText(result);
 			StyleConstants.setComponent(w, label);
 			
-			str = this.doc.getText(i, this.doc.getLength());
+			str = this.doc.getText(0, this.doc.getLength());
 		}
 	}
 }

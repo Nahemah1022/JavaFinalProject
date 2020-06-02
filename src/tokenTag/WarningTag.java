@@ -57,7 +57,7 @@ public class WarningTag extends TokenTag{
 			label.setText(result);
 			StyleConstants.setComponent(w, label);
 			
-			str = this.doc.getText(i, this.doc.getLength());
+			str = this.doc.getText(0, this.doc.getLength());
 		}
 	}
 }
