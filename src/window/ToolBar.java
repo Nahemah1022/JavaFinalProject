@@ -1,8 +1,10 @@
 package window;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.io.IOException;
 
 import javax.swing.BorderFactory;
@@ -11,12 +13,14 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import button.LoadButton;
+import button.MenuButton;
 import button.SaveButton;
 import button.TagButton;
 
 public class ToolBar extends JPanel {
 
 	private static final long serialVersionUID = 1L;
+	public static final int leftWidth = 240; 
 	
 	private JPanel fileSection;
 	private JPanel tagSection;
@@ -29,6 +33,7 @@ public class ToolBar extends JPanel {
 	private JButton image;
 	private SaveButton saver;
 	private LoadButton loader;
+	private MenuButton menuButton;
 	
 	ToolBar(EditArea source) throws IOException {
 		setBackground(new Color(28, 28, 30));
@@ -36,14 +41,18 @@ public class ToolBar extends JPanel {
 		setBorder(BorderFactory.createRaisedBevelBorder());
 		setPreferredSize(new Dimension(Window.FRAME.getSize().width/2, 40));
 		setMaximumSize(new Dimension(Window.FRAME.getSize().width*2, 40));
+				
 		fileSection = new JPanel();
-		fileSection.setLayout(new FlowLayout(FlowLayout.CENTER));
+		fileSection.setLayout(new GridLayout(0, 4));
 		fileSection.setBackground(new Color(28, 28, 30));
-		//fileSection.setPreferredSize(new Dimension(Window.FRAME.getSize().width/6, 40));
+		//fileSection.setBackground(new Color(10, 10, 10));
+		//fileSection.setBorder(BorderFactory.createRaisedBevelBorder());
+		fileSection.setPreferredSize(new Dimension(Window.FRAME.getSize().width/3, 40));
+		fileSection.setSize(new Dimension(Window.WIDTH/6, 40));
 		tagSection = new JPanel();
-		tagSection.setLayout(new FlowLayout(FlowLayout.CENTER));
+		tagSection.setLayout(new GridLayout(0, 6));
 		tagSection.setBackground(new Color(28, 28, 30));
-		//tagSection.setPreferredSize(new Dimension(Window.FRAME.getSize().width*5/6, 40));
+		tagSection.setPreferredSize(new Dimension(Window.FRAME.getSize().width*2/3, 40));
 		add(fileSection);
 		add(tagSection);
 		
@@ -55,15 +64,24 @@ public class ToolBar extends JPanel {
 		image = new TagButton("/images/image.png", source, "![](", ")");
 		saver = new SaveButton("/images/save.png", source);
 		loader = new LoadButton("/images/load.png", source);
+		menuButton = new MenuButton("/images/menu.png", source);
 		
+		fileSection.add(menuButton);
 		fileSection.add(saver);
 		fileSection.add(loader);
+		
 		tagSection.add(bold);
 		tagSection.add(italic);
 		tagSection.add(strike);
 		tagSection.add(checkbox);
 		tagSection.add(link);
 		tagSection.add(image);
+	}
+	
+	public void toggleFileSection() {
+		this.saver.setVisible(!this.saver.isVisible());
+		this.loader.setVisible(!this.loader.isVisible());
+		this.menuButton.setVisible(!this.menuButton.isVisible());
 	}
 	
 }

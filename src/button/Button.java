@@ -19,14 +19,6 @@ public class Button extends JButton {
 	Button(String iconPath, EditArea source) throws IOException {
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		setBorder(BorderFactory.createEmptyBorder());
-		/*setBorder(BorderFactory.createSoftBevelBorder(
-				BevelBorder.RAISED, 
-				new Color(81, 81, 81), 
-				new Color(81, 81, 81),
-				new Color(81, 81, 81),
-				new Color(81, 81, 81)
-			)
-		);*/
 		setOpaque(false);
 		setContentAreaFilled(false);
 		Image image = ImageIO.read(this.getClass().getResource(iconPath));

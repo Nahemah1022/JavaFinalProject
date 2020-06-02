@@ -3,20 +3,18 @@ import java.awt.Color;
 import java.awt.Font;
 
 import javax.swing.JTextPane;
-import javax.swing.event.CaretEvent;
-import javax.swing.event.CaretListener;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
 
 
-public class EditArea extends JTextPane{
+public class EditArea extends JTextPane {
 	
 	private static final long serialVersionUID = 1L;
 	
 	public static final int Width = Window.WIDTH/2;
 	public static final int HEIGHT = Window.HEIGHT-200;
-	private Window window;
+	public Window window;
 	
 	public EditArea(Window window) {
 		this.window = window;

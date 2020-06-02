@@ -10,6 +10,7 @@ import javax.swing.JFileChooser;
 import javax.swing.text.BadLocationException;
 
 import window.EditArea;
+import window.Menu;
 
 public class SaveButton extends Button {
 
@@ -21,17 +22,35 @@ public class SaveButton extends Button {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-			    JFileChooser chooser = new JFileChooser();
-			    chooser.setCurrentDirectory(new java.io.File("."));
-			    chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
-			    chooser.setDialogTitle("Save Note");
-			    chooser.setDialogType(JFileChooser.SAVE_DIALOG);
-			    int returnVal = chooser.showSaveDialog(source);
-			    if(returnVal == JFileChooser.APPROVE_OPTION) {
-			    	try {
-			    		File file = new File(chooser.getSelectedFile().getPath().replace("/", "\\") + ".txt");
-			    		file.createNewFile();
-			    		FileWriter writer = new FileWriter(file);
+				if(Menu.editingFileName.equals("")) {
+				    JFileChooser chooser = new JFileChooser();
+				    chooser.setCurrentDirectory(new java.io.File("."));
+				    chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+				    chooser.setDialogTitle("Save Note");
+				    chooser.setDialogType(JFileChooser.SAVE_DIALOG);
+				    int returnVal = chooser.showSaveDialog(source);
+				    if(returnVal == JFileChooser.APPROVE_OPTION) {
+				    	try {
+				    		File file = new File(chooser.getSelectedFile().getPath().replace("/", "\\") + ".txt");
+				    		file.createNewFile();
+				    		FileWriter writer = new FileWriter(file);
+				    		writer.write(source.getDocument().getText(0, source.getDocument().getLength()));
+				    	    writer.flush();
+				    	    writer.close();
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (BadLocationException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+				    }
+				}
+				else {
+					File file = new File(Menu.workspacePath + "\\" + Menu.editingFileName);
+					FileWriter writer;
+					try {
+						writer = new FileWriter(file);
 			    		writer.write(source.getDocument().getText(0, source.getDocument().getLength()));
 			    	    writer.flush();
 			    	    writer.close();
@@ -42,7 +61,7 @@ public class SaveButton extends Button {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-			    }
+				}
 			}
 			
 		});

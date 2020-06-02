@@ -2,7 +2,6 @@ package tokenTag;
 
 import java.awt.Color;
 
-import javax.swing.JLabel;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;

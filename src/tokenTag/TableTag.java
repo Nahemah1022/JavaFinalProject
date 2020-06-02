@@ -1,10 +1,7 @@
 package tokenTag;
 
-import java.awt.Dimension;
-
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.table.JTableHeader;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
