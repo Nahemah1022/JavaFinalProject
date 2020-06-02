@@ -6,7 +6,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JTextPane;
 import javax.swing.text.BadLocationException;
+import javax.swing.text.DefaultHighlighter;
 import javax.swing.text.Document;
+import javax.swing.text.Highlighter;
 import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
@@ -31,10 +33,14 @@ public class ViewArea extends JTextPane{
 	private ImageTag image;
 	private FontTag font;
 	private WarningTag warning;
+	private InfoTag info;
+	private SuccessTag success;
+	private DangerTag danger;
+	private CodeTag code;
 	
 	JLabel label;
-	
-	ViewArea(Document source){
+	Highlighter h;
+	ViewArea(Document source) throws BadLocationException{
 		setFont(new Font("Arial", Font.BOLD, 20));
 		setOpaque(true);
 		setEditable(false);
@@ -46,14 +52,14 @@ public class ViewArea extends JTextPane{
         strike = new StrikeTag(doc, "~~", "~~");
         image = new ImageTag(doc, "![","]","(",")") ;
         font = new FontTag(doc, "$$", "$$");
-        warning = new WarningTag(doc, ":::info", ":::");
+        warning = new WarningTag(doc, ":::warning\n", "\n:::");
+        info = new InfoTag(doc,":::info\n","\n:::");
+        success = new SuccessTag(doc, ":::success\n", "\n:::");
+        danger = new DangerTag(doc, ":::danger\n", "\n:::");
+        code = new CodeTag(doc, "```\n", "\n```");
+        
         addStylesToDocument(doc);
         
-        /*label = new JLabel("hello        world");
-		label.setBounds(0,-80,700,200);
-		label.setOpaque(true);
-		label.setBackground(Color.CYAN);
-	    add(label);*/
 	}
 	
 	private void addStylesToDocument(StyledDocument doc) {
@@ -79,6 +85,10 @@ public class ViewArea extends JTextPane{
 		image.apply();
 		font.apply();
 		warning.apply();
-
+		info.apply();
+		success.apply();
+		danger.apply();
+		code.apply();
+		
 	}
 }
