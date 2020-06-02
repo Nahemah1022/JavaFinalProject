@@ -51,12 +51,13 @@ public class SuccessTag extends TokenTag{
 			
 			JLabel label = new JLabel();
 			label.setPreferredSize(new Dimension(100, 50*newline_count));
-			label.setBackground(Color.GREEN);
+			label.setBackground(new Color(220,245,200));
 			label.setOpaque(true);
 			label.setFont (label.getFont().deriveFont (22.0f));
 			label.setText(result);
 			StyleConstants.setComponent(w, label);
 			
+			doc.remove(i, content.length()-1);
 			str = this.doc.getText(0, this.doc.getLength());
 		}
 	}

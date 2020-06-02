@@ -25,7 +25,7 @@ public class WarningTag extends TokenTag{
 				i!=-1 && j!=-1; 
 				i=str.indexOf(this.startToken, j+1), j=str.indexOf(this.endToken, i+1)) {
 			doc.setCharacterAttributes(i, j-i+1, this.doc.getStyle("warning"), true);
-			// :::info :::
+
 			System.out.println(i+" "+j);
 			String content = this.doc.getText(i+this.startToken.length(), j-i-this.startToken.length());
 			System.out.println(content);
@@ -47,16 +47,16 @@ public class WarningTag extends TokenTag{
 			doc.remove(i, this.startToken.length());
 			if(this.endToken != null) 
 				doc.remove(j-this.startToken.length(), this.endToken.length());
-			//doc.remove(i, content.length());
 			
 			JLabel label = new JLabel();
 			label.setPreferredSize(new Dimension(100, 50*newline_count));
-			label.setBackground(Color.YELLOW);
+			label.setBackground(new Color(255,250,180));
 			label.setOpaque(true);
 			label.setFont (label.getFont().deriveFont (22.0f));
 			label.setText(result);
 			StyleConstants.setComponent(w, label);
 			
+			doc.remove(i, content.length()-1);
 			str = this.doc.getText(0, this.doc.getLength());
 		}
 	}
