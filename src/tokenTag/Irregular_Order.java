@@ -2,7 +2,6 @@ package tokenTag;
 
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Style;
-import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
 import javax.swing.text.StyledDocument;
 
@@ -13,7 +12,7 @@ public class Irregular_Order extends TokenTag {
 		
         Style def = StyleContext.getDefaultStyleContext().
                 getStyle(StyleContext.DEFAULT_STYLE);
-		Style s = doc.addStyle("f_irregular", def);
+		doc.addStyle("f_irregular", def);
 	}
 
 	@Override

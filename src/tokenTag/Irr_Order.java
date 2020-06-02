@@ -12,7 +12,7 @@ public class Irr_Order extends TokenTag {
 		
         Style def = StyleContext.getDefaultStyleContext().
                 getStyle(StyleContext.DEFAULT_STYLE);
-		Style s = doc.addStyle("s_irregular", def);
+		doc.addStyle("s_irregular", def);
 	}
 
 	@Override

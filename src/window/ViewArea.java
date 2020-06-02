@@ -1,8 +1,6 @@
 package window;
 
-import java.awt.Color;
 import java.awt.Font;
-import javax.swing.JLabel;
 
 import javax.swing.JTextPane;
 import javax.swing.text.BadLocationException;
@@ -54,7 +52,7 @@ public class ViewArea extends JTextPane{
         quote = new Quote(doc, ">","\n");
         comment = new Comment(doc,"//","\n");
         s_irregular = new Irr_Order(doc,"	- ","\n");
-        f_irregular = new Irregular_Order(doc,"- ","\n");    
+        f_irregular = new Irregular_Order(doc,"- ","\n");
         Ulabel = new UnderLabel(doc,"~","~");
         addStylesToDocument(doc);
 	}
