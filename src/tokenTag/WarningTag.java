@@ -71,8 +71,8 @@ public class WarningTag extends TokenTag{
 			label.setText(result);
 			StyleConstants.setComponent(w, label);
 			
-			System.out.println("ffff="+doc.getText(i, content.length()));
-			doc.remove(i, content.length());
+			System.out.println("ffff="+doc.getText(i, content.length()-1));
+			doc.remove(i, content.length()-1);
 			subnum += content.length()-1;
 			str = this.doc.getText(0, this.doc.getLength());
 		}

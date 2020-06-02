@@ -82,7 +82,7 @@ public class ViewArea extends JTextPane{
 		
 		title.apply();
 		italic.apply();
-		bold.apply();
+		//bold.apply();
 		strike.apply();
 		image.apply();
 		font.apply();
@@ -91,6 +91,6 @@ public class ViewArea extends JTextPane{
 		success.apply();
 		danger.apply();
 		code.apply();
-		
+		bold.apply();
 	}
 }
