@@ -2,9 +2,6 @@ package tokenTag;
 
 import javax.swing.*;
 
-import java.awt.*;
-import java.awt.event.*;
-
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;

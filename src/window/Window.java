@@ -8,7 +8,9 @@ import java.io.IOException;
 
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
@@ -24,6 +26,9 @@ public class Window extends JPanel implements ActionListener {
 	private JPanel leftArea;
 	private EditArea editArea;
 	private ToolBar toolBar;
+	private JLayeredPane muneContainer;
+	private Menu menu;
+	private boolean menuShowing;
 	private static final String TITLE = "Notability";
 	
 	public static JFrame FRAME;
@@ -34,6 +39,9 @@ public class Window extends JPanel implements ActionListener {
 	public Window() throws BadLocationException, IOException {
 		setLayout(new BorderLayout());
 		
+		muneContainer = new JLayeredPane();
+		muneContainer.setLayout(new BorderLayout());
+		
 		leftArea = new JPanel();
 		leftArea.setLayout(new BoxLayout(leftArea, BoxLayout.Y_AXIS));
 		editArea = new EditArea(this);
@@ -41,9 +49,15 @@ public class Window extends JPanel implements ActionListener {
 		leftArea.add(toolBar);
 		leftArea.add(new ScrollArea(editArea, "Source"));
 		
+		menu = new Menu(editArea);
+		muneContainer.add(menu);
+		muneContainer.add(leftArea);
+		muneContainer.setLayer(leftArea, 100);
+		menuShowing = true;
+		
 		viewArea = new ViewArea(editArea.getDocument());
         JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
-        		leftArea,
+        		new JScrollPane(muneContainer),
         		new ScrollArea(viewArea, "Styled")
         );
         splitPane.setOneTouchExpandable(true);
@@ -88,6 +102,14 @@ public class Window extends JPanel implements ActionListener {
         });
 	}
 
+	public void toggleMenu() {
+		muneContainer.setLayer(leftArea, this.menuShowing ? -1 : 100);
+		this.editArea.setEditable(!menuShowing);
+		this.menuShowing = !this.menuShowing;
+		this.menu.setVisible(!this.menuShowing);
+		this.toolBar.toggleFileSection();
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
