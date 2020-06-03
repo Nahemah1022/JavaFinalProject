@@ -1,6 +1,8 @@
+package window;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.io.IOException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -14,12 +16,11 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
 import javax.swing.text.StyledDocument;
 
-import com.sun.javafx.css.Stylesheet;
+import button.TagButton;
 
-import jdk.internal.org.objectweb.asm.Label;
 import tokenTag.*;
 
-public class ViewArea extends JTextPane{
+public class ViewArea extends JTextPane {
 	
 	private static final long serialVersionUID = 1L;
 
@@ -29,6 +30,19 @@ public class ViewArea extends JTextPane{
 	private TitleTag title;
 	private BoldTag bold;
 	private ItalicTag italic;
+
+	private HyperLinkTag hyperlink;
+	private MarkdownTag markdown;
+	private CheckboxTag checkbox;
+	private TableTag table;
+
+	private UnderlineTag underline;
+	private Quote quote;
+	private Comment comment;
+	private Irregular_Order f_irregular;
+	private Irr_Order s_irregular;
+	private UnderLabel Ulabel;
+
 	private StrikeTag strike;
 	private ImageTag image;
 	private FontTag font;
@@ -37,19 +51,28 @@ public class ViewArea extends JTextPane{
 	private SuccessTag success;
 	private DangerTag danger;
 	private CodeTag code;
-	
-	JLabel label;
-	Highlighter h;
-	ViewArea(Document source) throws BadLocationException{
+
+	ViewArea(EditArea editArea) throws BadLocationException{
 		setFont(new Font("Arial", Font.BOLD, 20));
 		setOpaque(true);
 		setEditable(false);
+		setContentType("tekst/html");
 		
         StyledDocument doc = getStyledDocument();
         title = new TitleTag(doc, "#", "\n");
-        bold = new BoldTag(doc, "*", "*");
-        italic = new ItalicTag(doc, "**", "**");
+        bold = new BoldTag(doc, "**", "**");
+        italic = new ItalicTag(doc, "*", "*");
+        hyperlink = new HyperLinkTag(doc, "[", ")");
+        markdown = new MarkdownTag(doc, "==", "==");
+        checkbox = new CheckboxTag(doc, "- [ ]", "\n");
+        table = new TableTag(doc, "|", "-|\n");
+        underline = new UnderlineTag(doc, "_","_");
+        quote = new Quote(doc, ">","\n");
+        comment = new Comment(doc,"//","\n");
+        s_irregular = new Irr_Order(doc,"	- ","\n");
+        f_irregular = new Irregular_Order(doc,"- ","\n");
         strike = new StrikeTag(doc, "~~", "~~");
+        Ulabel = new UnderLabel(doc,"~","~");
         image = new ImageTag(doc, "![","]","(",")") ;
         font = new FontTag(doc, "$$", "$$");
         warning = new WarningTag(doc, ":::warning\n", "\n:::");
@@ -67,7 +90,6 @@ public class ViewArea extends JTextPane{
                 getStyle(StyleContext.DEFAULT_STYLE);
         StyleConstants.setFontFamily(def, "SansSerif");
         StyleConstants.setBold(def, false);
-        
 		Style s = doc.addStyle("regular", def);
 		StyleConstants.setBold(s, false);
 	}
@@ -75,14 +97,28 @@ public class ViewArea extends JTextPane{
 	public void setViewText(Document source) throws BadLocationException {
 		String str = source.getText(0, source.getLength());
 		StyledDocument doc = getStyledDocument();
+		//System.out.println(str.length() - doc.getLength());
 		doc.remove(0, doc.getLength());
 		doc.insertString(0, str, doc.getStyle("regular"));
 		
 		title.apply();
-		italic.apply();
 		bold.apply();
-		strike.apply();
+		italic.apply();
+		checkbox.apply();
+		
 		image.apply();
+		
+		hyperlink.apply();
+		markdown.apply();
+		table.apply();
+		underline.apply();
+		quote.apply();
+		comment.apply();
+		s_irregular.apply();
+		f_irregular.apply();
+		strike.apply();
+		Ulabel.apply();
+		
 		font.apply();
 		warning.apply();
 		info.apply();

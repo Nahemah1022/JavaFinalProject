@@ -33,9 +33,16 @@ public class CodeTag extends TokenTag{
 			StringBuilder sBuilder = new StringBuilder(content);
 			int newline_count = 0;
 			for(int k=content.length()-1;k>0;k--) {
+				
 				if(content.charAt(k)=='\n') {
-					sBuilder.insert(k, "<br/>&nbsp;&nbsp;&nbsp;&nbsp;");
-					newline_count++;
+					if(k==content.length()-2) {
+						sBuilder.insert(k, "<br/>");
+						newline_count++;
+					}
+					else {
+						sBuilder.insert(k, "<br/>&nbsp;&nbsp;&nbsp;&nbsp;");
+						newline_count++;
+					}
 				}	
 			}
 

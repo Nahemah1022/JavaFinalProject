@@ -26,9 +26,7 @@ public class DangerTag extends TokenTag{
 				i=str.indexOf(this.startToken, j+1), j=str.indexOf(this.endToken, i+1)) {
 			doc.setCharacterAttributes(i, j-i+1, this.doc.getStyle("danger"), true);
 			
-			System.out.println(i+" "+j);
 			String content = this.doc.getText(i+this.startToken.length(), j-i-this.startToken.length());
-			System.out.println(content);
 			
 			StringBuilder sBuilder = new StringBuilder(content);
 			int newline_count = 0;
@@ -41,16 +39,13 @@ public class DangerTag extends TokenTag{
 
 			String newContent = "<html><body>"+sBuilder+"</body><html>";
 			String result = newContent.replace("\n","");
-			System.out.println(result);
-			
-			System.out.println("end: "+this.endToken);
 			doc.remove(i, this.startToken.length());
 			if(this.endToken != null) 
 				doc.remove(j-this.startToken.length(), this.endToken.length());
 			//doc.remove(i, content.length());
 			
 			JLabel label = new JLabel();
-			label.setPreferredSize(new Dimension(100, 50*newline_count));
+			label.setPreferredSize(new Dimension(100, 50*(newline_count+1)));
 			label.setBackground(new Color(250, 220, 230));
 			label.setOpaque(true);
 			label.setFont (label.getFont().deriveFont (22.0f));
