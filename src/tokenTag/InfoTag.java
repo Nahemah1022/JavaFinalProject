@@ -13,20 +13,23 @@ import javax.swing.text.StyledDocument;
 public class InfoTag extends TokenTag{
 	JLabel label ;
 	Style def = StyleContext.getDefaultStyleContext().getStyle(StyleContext.DEFAULT_STYLE);
-	Style w = doc.addStyle("information", def);
+	Style w = doc.addStyle("infoo", def);
 	
 	public InfoTag(StyledDocument target, String start, String end) {
 		super(target, start, end);
 	}
 	
 	public void apply() throws BadLocationException {
+		int subnum = 0;
 		String str = this.doc.getText(0, this.doc.getLength());
 		for(int i=str.indexOf(this.startToken), j=str.indexOf(this.endToken, i+1); 
 				i!=-1 && j!=-1; 
-				i=str.indexOf(this.startToken, j+1), j=str.indexOf(this.endToken, i+1)) {
-			doc.setCharacterAttributes(i, j-i+1, this.doc.getStyle("information"), true);
+				i=str.indexOf(this.startToken,  j+1-subnum), j=str.indexOf(this.endToken, i+1)) {
 			
-			String content = this.doc.getText(i+this.startToken.length(), j-i-this.startToken.length());
+			subnum = 0;
+			
+			String content = str.substring(i+this.startToken.length(),j);
+			//System.out.println("content = "+content);
 			
 			StringBuilder sBuilder = new StringBuilder(content);
 			int newline_count = 0;
@@ -39,20 +42,27 @@ public class InfoTag extends TokenTag{
 
 			String newContent = "<html><body>"+sBuilder+"</body><html>";
 			String result = newContent.replace("\n","");
-			doc.remove(i, this.startToken.length());
-			if(this.endToken != null) 
-				doc.remove(j-this.startToken.length(), this.endToken.length());
 			
 			JLabel label = new JLabel();
-			label.setPreferredSize(new Dimension(100, 50*3));
+			label.setPreferredSize(new Dimension(100, 50*(newline_count+1)));
 			label.setBackground(new Color(220,240,245));
 			label.setOpaque(true);
 			label.setFont (label.getFont().deriveFont (22.0f));
 			label.setText(result);
 			StyleConstants.setComponent(w, label);
 			
-			doc.remove(i, content.length()-1);
+			
+			doc.setCharacterAttributes(i+this.startToken.length(), j-i-this.startToken.length(), this.doc.getStyle("infoo"), true);
+			doc.remove(i, this.startToken.length());
+			subnum += this.startToken.length();
+			if(this.endToken.equals("\n") == false) {
+				doc.remove(j-this.startToken.length(), this.endToken.length());
+				subnum += this.endToken.length();
+			}
+			
+			
 			str = this.doc.getText(0, this.doc.getLength());
+			
 		}
 	}
 }

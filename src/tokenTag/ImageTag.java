@@ -48,7 +48,7 @@ public class ImageTag extends TokenTag {
 				));
 				label.setName(path);
 				StyleConstants.setComponent(s, label);
-				System.out.println("name: "+StyleConstants.getComponent(s));
+				//System.out.println("name: "+StyleConstants.getComponent(s));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
