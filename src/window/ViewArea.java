@@ -52,7 +52,7 @@ public class ViewArea extends JTextPane {
 	private DangerTag danger;
 	private CodeTag code;
 
-	ViewArea(Document source) throws BadLocationException{
+	ViewArea(EditArea editArea) throws BadLocationException{
 		setFont(new Font("Arial", Font.BOLD, 20));
 		setOpaque(true);
 		setEditable(false);
@@ -105,6 +105,9 @@ public class ViewArea extends JTextPane {
 		italic.apply();
 		bold.apply();
 		checkbox.apply();
+		
+		image.apply();
+		
 		hyperlink.apply();
 		markdown.apply();
 		table.apply();
@@ -115,7 +118,7 @@ public class ViewArea extends JTextPane {
 		f_irregular.apply();
 		Ulabel.apply();
 		strike.apply();
-		image.apply();
+		
 		font.apply();
 		warning.apply();
 		info.apply();

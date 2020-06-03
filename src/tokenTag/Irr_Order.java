@@ -25,7 +25,7 @@ public class Irr_Order extends TokenTag {
 			subnum = 0;
 			doc.setCharacterAttributes(i, j-i+1, this.doc.getStyle("s_irregular"), true);
 			doc.remove(i+1, this.startToken.length()-1);
-			doc.insertString(i+1, "¡C", doc.getStyle("s_irregular"));
+			doc.insertString(i+1, "â—¦", doc.getStyle("s_irregular"));
 			subnum += this.startToken.length();
 			if(this.endToken != "\n") {
 				doc.remove(j-this.startToken.length(), this.endToken.length());
