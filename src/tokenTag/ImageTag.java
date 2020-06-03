@@ -13,8 +13,6 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
 import javax.swing.text.StyledDocument;
 
-import com.sun.prism.Image;
-
 public class ImageTag extends TokenTag {
 	
 	Style def = StyleContext.getDefaultStyleContext().
@@ -43,7 +41,11 @@ public class ImageTag extends TokenTag {
 				BufferedImage bimg = ImageIO.read(new File(path));
 				int width          = bimg.getWidth();
 				int height         = bimg.getHeight();
-				JLabel label = new JLabel(new ImageIcon(image.getScaledInstance(width, height, Image.SCALE_SMOOTH)));
+				JLabel label = new JLabel(new ImageIcon(
+					width > 400 ?
+					image.getScaledInstance(400, height*400/width, Image.SCALE_DEFAULT) : 
+					image.getScaledInstance(width, height, Image.SCALE_DEFAULT)
+				));
 				label.setName(path);
 				StyleConstants.setComponent(s, label);
 				System.out.println("name: "+StyleConstants.getComponent(s));
