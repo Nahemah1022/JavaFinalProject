@@ -73,7 +73,7 @@ public class ViewArea extends JTextPane {
         f_irregular = new Irregular_Order(doc,"- ","\n");
         strike = new StrikeTag(doc, "~~", "~~");
         Ulabel = new UnderLabel(doc,"~","~");
-        image = new ImageTag(doc, "![","]","(",")") ;
+        image = new ImageTag(doc, "![](",")") ;
         font = new FontTag(doc, "$$", "$$");
         warning = new WarningTag(doc, ":::warning\n", "\n:::");
         info = new InfoTag(doc,":::info\n","\n:::");
