@@ -48,9 +48,9 @@ public class CodeTag extends TokenTag{
 
 			String newContent = "<html><body>"+sBuilder+"</body><html>";
 			String result = newContent.replace("\n","");
-			System.out.println(result);
+			//System.out.println(result);
 			
-			System.out.println("end: "+this.endToken);
+			//System.out.println("end: "+this.endToken);
 			doc.remove(i, this.startToken.length());
 			if(this.endToken != null) 
 				doc.remove(j-this.startToken.length(), this.endToken.length());
