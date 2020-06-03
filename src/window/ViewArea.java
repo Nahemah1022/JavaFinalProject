@@ -68,7 +68,7 @@ public class ViewArea extends JTextPane {
         table = new TableTag(doc, "|", "-|\n");
         underline = new UnderlineTag(doc, "_","_");
         quote = new Quote(doc, ">","\n");
-        comment = new Comment(doc,"//","\n");
+        comment = new Comment(doc,"// ","\n");
         s_irregular = new Irr_Order(doc,"	- ","\n");
         f_irregular = new Irregular_Order(doc,"- ","\n");
         strike = new StrikeTag(doc, "~~", "~~");
