@@ -23,7 +23,7 @@ public class Irregular_Order extends TokenTag {
 				i!=-1 && j!=-1; 
 				i=str.indexOf(this.startToken, j+1-subnum), j=str.indexOf(this.endToken, i+1)) {
 			subnum = 0;
-			doc.setCharacterAttributes(i, j-i+1, this.doc.getStyle("f_irregular"), true);
+			doc.setCharacterAttributes(i, j-i+1, this.doc.getStyle("f_irregular"), false);
 			doc.remove(i, this.startToken.length());
 			doc.insertString(i, "•", doc.getStyle("f_irregular"));
 			subnum += this.startToken.length();

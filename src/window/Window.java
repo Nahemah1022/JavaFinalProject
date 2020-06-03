@@ -42,7 +42,7 @@ public class Window extends JPanel implements ActionListener {
 	
 	public static JFrame FRAME;
 	public static final Dimension SCREEN_SIZE = Toolkit.getDefaultToolkit().getScreenSize();
-	public static final int WIDTH = 1200;
+	public static final int WIDTH = 1600;
 	public static final int HEIGHT = 800;
 
 	public Window() throws BadLocationException, IOException {

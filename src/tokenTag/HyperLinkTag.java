@@ -68,25 +68,33 @@ public class HyperLinkTag extends TokenTag {
 	public void apply() throws BadLocationException {
 		String str = this.doc.getText(0, this.doc.getLength());
 		String nameString = str;
-		String pathString;
+		String pathString = str;
 		int subnum = 0;
 		for(int i=str.indexOf(this.startToken), j=str.indexOf(this.endToken, i+1); 
 				i!=-1 && j!=-1; 
 				i=str.indexOf(this.startToken, j+1-subnum), j=str.indexOf(this.endToken, i+1)) {
 			
 			subnum = 0;
-			nameString = str.substring(i+1, str.indexOf("]", i+1));
-			pathString = str.substring(str.indexOf("]", i+1)+2, j);
-			HyperlinkDemo(nameString, pathString);
-			doc.setCharacterAttributes(i, j-i+1, this.doc.getStyle("link"), true);
-			doc.remove(i, this.startToken.length());
-			subnum += this.startToken.length();
-			if(this.endToken.equals("\n") == false) {
-				doc.remove(j-this.startToken.length(), this.endToken.length());
-				subnum += this.endToken.length();
-			} 
-				
-			str = this.doc.getText(0, this.doc.getLength());
+			int isLink = 1;
+			String tmp = str.substring(i, j+1);
+			if(tmp.indexOf("]", 0) < tmp.indexOf("](", 0)) {
+				isLink = 0;
+			}
+			if(tmp.indexOf("](", 0) != -1 && tmp.indexOf("\n", 0) == -1 && isLink == 1) {
+				nameString = str.substring(i+1, str.indexOf("]", i+1));
+				pathString = str.substring(str.indexOf("]", i+1)+2, j);
+				HyperlinkDemo(nameString, pathString);
+				doc.setCharacterAttributes(i, j-i+1, this.doc.getStyle("link"), true);
+				doc.remove(i, this.startToken.length());
+				subnum += this.startToken.length();
+				if(this.endToken.equals("\n") == false) {
+					doc.remove(j-this.startToken.length(), this.endToken.length());
+					subnum += this.endToken.length();
+				} 
+					
+				str = this.doc.getText(0, this.doc.getLength());
+			}
+			
 		}
 	}
 }

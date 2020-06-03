@@ -25,7 +25,7 @@ public class ItalicTag extends TokenTag {
 				i!=-1 && j!=-1; 
 				i=str.indexOf(this.startToken, j+1 - subnum), j=str.indexOf(this.endToken, i+1)) {
 			subnum = 0;
-			doc.setCharacterAttributes(i, j-i+1, this.doc.getStyle("italic"), true);
+			doc.setCharacterAttributes(i, j-i+1, this.doc.getStyle("italic"), false);
 			doc.remove(i, this.startToken.length());
 			subnum += this.startToken.length();
 			if(this.endToken.equals("\n") == false) {

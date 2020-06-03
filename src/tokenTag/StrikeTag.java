@@ -22,7 +22,7 @@ public class StrikeTag extends TokenTag {
 		for(int i=str.indexOf(this.startToken), j=str.indexOf(this.endToken, i+1); 
 				i!=-1 && j!=-1; 
 				i=str.indexOf(this.startToken, j+1), j=str.indexOf(this.endToken, i+1)) {
-			doc.setCharacterAttributes(i, j-i+1, this.doc.getStyle("strike"), true);
+			doc.setCharacterAttributes(i, j-i+1, this.doc.getStyle("strike"), false);
 			doc.remove(i, this.startToken.length());
 			if(this.endToken != "\n") 
 				doc.remove(j-this.startToken.length(), this.endToken.length());

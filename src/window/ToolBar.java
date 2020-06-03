@@ -57,11 +57,11 @@ public class ToolBar extends JPanel {
 		add(fileSection);
 		add(tagSection);
 		
-		bold = new TagButton("/images/bold.png", source, "*", "*");
-		italic = new TagButton("/images/italic.png", source, "**", "**");
+		bold = new TagButton("/images/bold.png", source, "**", "**");
+		italic = new TagButton("/images/italic.png", source, "*", "*");
 		strike = new TagButton("/images/strike.png", source, "~~", "~~");
 		checkbox = new TagButton("/images/checkbox.png", source, "- [ ]", "\n");
-		link = new TagButton("/images/link.png", source, "[", "[(https:\\)");
+		link = new TagButton("/images/link.png", source, "[", "](https:\\\\)");
 		image = new ImageButton("/images/image.png", source);
 		list = new TagButton("/images/list.png", source, "- ", "\n");
 		quote = new TagButton("/images/quote.png", source, "> ","\n");
