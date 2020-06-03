@@ -33,7 +33,7 @@ public class BoldTag extends TokenTag {
 				subnum += this.endToken.length();
 			} 
 				
-			System.out.println(this.endToken);
+			//System.out.println(this.endToken);
 			str = this.doc.getText(0, this.doc.getLength());
 		}
 	}

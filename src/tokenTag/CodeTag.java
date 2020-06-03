@@ -66,8 +66,8 @@ public class CodeTag extends TokenTag{
 			if(this.endToken.equals("\n") == false) {
 				doc.remove(j-this.startToken.length(), this.endToken.length());
 				subnum += this.endToken.length();
+				doc.remove(i, content.length()-1);
 			}
-				
 			str = this.doc.getText(0, this.doc.getLength());
 			
 		}

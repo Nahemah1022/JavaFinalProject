@@ -35,14 +35,13 @@ public class InfoTag extends TokenTag{
 			int newline_count = 0;
 			for(int k=content.length()-1;k>0;k--) {
 				if(content.charAt(k)=='\n') {
-					sBuilder.insert(k, "<br/>");
+					sBuilder.insert(k, "<br>");
 					newline_count++;
 				}	
 			}
-
+			
 			String newContent = "<html><body>"+sBuilder+"</body><html>";
 			String result = newContent.replace("\n","");
-			
 			JLabel label = new JLabel();
 			label.setPreferredSize(new Dimension(100, 50*(newline_count+1)));
 			label.setBackground(new Color(220,240,245));
@@ -58,6 +57,7 @@ public class InfoTag extends TokenTag{
 			if(this.endToken.equals("\n") == false) {
 				doc.remove(j-this.startToken.length(), this.endToken.length());
 				subnum += this.endToken.length();
+				doc.remove(i, content.length()-1);
 			}
 			
 			
