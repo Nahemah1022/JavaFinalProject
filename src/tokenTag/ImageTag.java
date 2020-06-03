@@ -2,7 +2,12 @@ package tokenTag;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.text.BadLocationException;
@@ -34,11 +39,9 @@ public class ImageTag extends TokenTag {
 				i=str.indexOf(this.startToken, l+1), j=str.indexOf(this.endToken, i+1),
 				k=str.indexOf(this.path_start_token,i+2),l=str.indexOf(this.path_end_token,i+3)) {
 			
-			System.out.println(i+" "+j+" "+k+" "+l);
 			doc.setCharacterAttributes(i, l-i+1, this.doc.getStyle("image"), true);
 			
 			img_txt = this.doc.getText(i+this.startToken.length(), j-i-2);
-			System.out.println("img_txt:"+img_txt);
 			
 			doc.remove(i, this.startToken.length()); // remove ![
 			
@@ -46,22 +49,27 @@ public class ImageTag extends TokenTag {
 			doc.remove(i+img_txt.length(), this.endToken.length()+this.path_start_token.length());
 			
 			path = this.doc.getText(i+img_txt.length(), l-k-1);
-			System.out.println("path:"+path);
 			
 			// remove )
 			if(this.path_end_token != "\n") 
 				doc.remove(i+img_txt.length()+path.length(), this.path_end_token.length());
 			
 			//StyleConstants.setIcon(s, new ImageIcon(path));
-			
-			JLabel label = new JLabel(new ImageIcon(path));
-			StyleConstants.setComponent(s, label);
+			try {
+				Image image = ImageIO.read(new File(path));
+				BufferedImage bimg = ImageIO.read(new File(path));
+				int width          = bimg.getWidth();
+				int height         = bimg.getHeight();
+				JLabel label = new JLabel(new ImageIcon(image.getScaledInstance(width, height, Image.SCALE_DEFAULT)));
+				StyleConstants.setComponent(s, label);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 			doc.remove(i, img_txt.length()-1);
 			doc.remove(i, path.length()-1);
 			str = this.doc.getText(0, this.doc.getLength());
-			System.out.println(str);
-			
 		}
 	}
 }

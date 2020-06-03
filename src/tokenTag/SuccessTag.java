@@ -26,9 +26,7 @@ public class SuccessTag extends TokenTag{
 				i=str.indexOf(this.startToken, j+1), j=str.indexOf(this.endToken, i+1)) {
 			doc.setCharacterAttributes(i, j-i+1, this.doc.getStyle("success"), true);
 			
-			System.out.println(i+" "+j);
 			String content = this.doc.getText(i+this.startToken.length(), j-i-this.startToken.length());
-			System.out.println(content);
 			
 			StringBuilder sBuilder = new StringBuilder(content);
 			int newline_count = 0;
@@ -41,9 +39,6 @@ public class SuccessTag extends TokenTag{
 
 			String newContent = "<html><body>"+sBuilder+"</body><html>";
 			String result = newContent.replace("\n","");
-			System.out.println(result);
-			
-			System.out.println("end: "+this.endToken);
 			doc.remove(i, this.startToken.length());
 			if(this.endToken != null) 
 				doc.remove(j-this.startToken.length(), this.endToken.length());
