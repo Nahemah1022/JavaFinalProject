@@ -51,6 +51,7 @@ public class ViewArea extends JTextPane {
 	private SuccessTag success;
 	private DangerTag danger;
 	private CodeTag code;
+	private DividerTag divider;
 
 	ViewArea(EditArea editArea) throws BadLocationException{
 		setFont(new Font("Arial", Font.BOLD, 20));
@@ -80,6 +81,7 @@ public class ViewArea extends JTextPane {
         success = new SuccessTag(doc, ":::success\n", "\n:::");
         danger = new DangerTag(doc, ":::danger\n", "\n:::");
         code = new CodeTag(doc, "```\n", "\n```");
+        divider = new DividerTag(doc, "-", "=");
         
         addStylesToDocument(doc);
         
@@ -125,6 +127,7 @@ public class ViewArea extends JTextPane {
 		success.apply();
 		danger.apply();
 		code.apply();
+		divider.apply();
 		
 	}
 }
