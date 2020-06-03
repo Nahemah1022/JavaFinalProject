@@ -60,6 +60,7 @@ public class SuccessTag extends TokenTag{
 				subnum += this.endToken.length();
 				doc.remove(i, content.length()-1);
 			}
+			
 				
 			str = this.doc.getText(0, this.doc.getLength());
 			
