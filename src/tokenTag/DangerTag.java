@@ -29,7 +29,7 @@ public class DangerTag extends TokenTag{
 			subnum = 0;
 			
 			String content = str.substring(i+this.startToken.length(),j);
-			System.out.println("content = "+content);
+			//System.out.println("content = "+content);
 			
 			StringBuilder sBuilder = new StringBuilder(content);
 			int newline_count = 0;
