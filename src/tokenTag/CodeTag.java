@@ -13,22 +13,23 @@ import javax.swing.text.StyledDocument;
 public class CodeTag extends TokenTag{
 	JLabel label ;
 	Style def = StyleContext.getDefaultStyleContext().getStyle(StyleContext.DEFAULT_STYLE);
-	Style w = doc.addStyle("code", def);
+	Style w = doc.addStyle("codee", def);
 	
 	public CodeTag(StyledDocument target, String start, String end) {
 		super(target, start, end);
 	}
 	
 	public void apply() throws BadLocationException {
+		int subnum = 0;
 		String str = this.doc.getText(0, this.doc.getLength());
 		for(int i=str.indexOf(this.startToken), j=str.indexOf(this.endToken, i+1); 
 				i!=-1 && j!=-1; 
-				i=str.indexOf(this.startToken, j+1), j=str.indexOf(this.endToken, i+1)) {
-			doc.setCharacterAttributes(i, j-i+1, this.doc.getStyle("code"), true);
+				i=str.indexOf(this.startToken,  j+1-subnum), j=str.indexOf(this.endToken, i+1)) {
 			
-			System.out.println(i+" "+j);
-			String content = this.doc.getText(i+this.startToken.length(), j-i-this.startToken.length());
-			System.out.println(content);
+			subnum = 0;
+			
+			String content = str.substring(i+this.startToken.length(),j);
+			System.out.println("content = "+content);
 			
 			StringBuilder sBuilder = new StringBuilder(content);
 			int newline_count = 0;
@@ -48,15 +49,9 @@ public class CodeTag extends TokenTag{
 
 			String newContent = "<html><body>"+sBuilder+"</body><html>";
 			String result = newContent.replace("\n","");
-			//System.out.println(result);
-			
-			//System.out.println("end: "+this.endToken);
-			doc.remove(i, this.startToken.length());
-			if(this.endToken != null) 
-				doc.remove(j-this.startToken.length(), this.endToken.length());
 			
 			JLabel label = new JLabel();
-			label.setPreferredSize(new Dimension(100, 50*newline_count));
+			label.setPreferredSize(new Dimension(100, 50*(newline_count+1)));
 			label.setBackground(Color.BLACK);
 			label.setForeground(Color.WHITE);
 			label.setOpaque(true);
@@ -64,8 +59,17 @@ public class CodeTag extends TokenTag{
 			label.setText(result);
 			StyleConstants.setComponent(w, label);
 			
-			doc.remove(i, content.length()-1);
+			
+			doc.setCharacterAttributes(i+this.startToken.length(), j-i-this.startToken.length(), this.doc.getStyle("codee"), true);
+			doc.remove(i, this.startToken.length());
+			subnum += this.startToken.length();
+			if(this.endToken.equals("\n") == false) {
+				doc.remove(j-this.startToken.length(), this.endToken.length());
+				subnum += this.endToken.length();
+			}
+				
 			str = this.doc.getText(0, this.doc.getLength());
+			
 		}
 	}
 }
