@@ -1,6 +1,7 @@
 package tokenTag;
 
 import java.awt.Color;
+import java.awt.Font;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
@@ -30,7 +31,9 @@ public class Quote extends TokenTag {
 			
 			JLabel label = new JLabel(str.substring(i+1, j));
 			StyleConstants.setComponent(s, label);
-			label.setBorder(BorderFactory.createMatteBorder(0, 1, 0, 0, Color.LIGHT_GRAY));
+			label.setBorder(BorderFactory.createMatteBorder(0, 2, 0, 0, Color.LIGHT_GRAY));
+			label.setFont(new Font("Arial", Font.PLAIN, 20));
+			label.setForeground(new Color(119, 119, 119));
 			
 			doc.setCharacterAttributes(i+1, j-i-1, this.doc.getStyle("label"), true);
 			doc.remove(i, this.startToken.length());

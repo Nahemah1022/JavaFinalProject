@@ -40,17 +40,22 @@ public class TitleTag extends TokenTag {
 	@Override
 	public void apply() throws BadLocationException {
 		String str = this.doc.getText(0, this.doc.getLength());
-		int hCount = 1;
+		int hCount = 1, subnum = 0;
 		for(int i=str.indexOf(this.startToken), j=str.indexOf(this.endToken, i+1); 
 				i!=-1 && j!=-1; 
-				i=str.indexOf(this.startToken, j+1), j=str.indexOf(this.endToken, i+1)) {
+				i=str.indexOf(this.startToken, j+1-subnum), j=str.indexOf(this.endToken, i+1)) {
+			subnum = 0;
+			hCount = 1;
 			while(str.charAt(++i) == '#') {
 				hCount++;
 			}
 			doc.setCharacterAttributes(i, j-i+1, this.doc.getStyle("h" + hCount), true);
 			doc.remove(i-hCount, this.startToken.length()-1+hCount);
-			if(!this.endToken.equals("\n")) 
+			subnum += this.startToken.length()-1+hCount;
+			if(!this.endToken.equals("\n")) {
 				doc.remove(j-this.startToken.length(), this.endToken.length());
+				subnum += this.endToken.length();
+			}
 			str = this.doc.getText(0, this.doc.getLength());
 		}
 	}
