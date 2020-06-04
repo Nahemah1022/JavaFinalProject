@@ -1,7 +1,5 @@
 # JavaFinalProject
 Java final project in 2020 Spring
-# JavaFinalProject
-Java final project in 2020 Spring
 
 ## 語法介紹
 
