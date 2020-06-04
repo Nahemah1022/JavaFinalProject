@@ -1,0 +1,55 @@
+#計算機組織
+---=
+
+####Chapter 1 : Introduction
+
+######Level of Program
+
+:::success
+High Level ➔ Assembly Language ➔ Hardware
+:::
+
+######Execution Time
+
+-  Response Time: 一件任務從開始到完成所需的時間
+	-  Processing(CPU time本堂課重點)
+	-  I/O
+	-  OS overhead
+	-  idle time
+
+-  Throughput
+	-  一段時間內能完成的工作量
+
+-  Performance
+	-  1/ExecutionTime
+
+######CPU time
+
+-  CPU的運算時間(不考慮I/O花的時間)
+
+-  分類
+	-  User CPU time: CPU在此程式上花的時間
+	-  System CPU time: OS在此程式上用的CPU時間
+-  優化
+	-  減少cycle數
+	-  增加clock rate
+
+######CPI: Cycle per Instruction
+
+-  一個指令需要花幾個CPU Cycle
+
+-  影響因素
+	-  Program: 程式種類
+	-  ISA(Instruction Set): 指令集種類
+	-  Compile
+
+######Mutiprocessors(多核心)
+
+-  一chip中有多個processor
+
+-  需要平行化程式(parallel programming)
+	-  Programming for both correctness and performance
+	-  Load balancing
+	-  Optimizing communication and synchronization
+
+![](pipeline.png)

@@ -52,7 +52,6 @@ public class SaveButton extends Button {
 					try {
 						writer = new FileWriter(file);
 			    		writer.write(source.getDocument().getText(0, source.getDocument().getLength()));
-			    		System.out.println(source.getDocument().getText(0, source.getDocument().getLength()));
 			    	    writer.flush();
 			    	    writer.close();
 					} catch (IOException e1) {

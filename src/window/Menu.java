@@ -77,6 +77,7 @@ public class Menu extends JPanel {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 				    JFileChooser chooser = new JFileChooser();
+				    chooser.setCurrentDirectory(new java.io.File(Menu.workspacePath.equals("") ? "." : Menu.workspacePath));
 				    chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 				    chooser.setDialogTitle("Open Workspace");
 				    int returnVal = chooser.showOpenDialog(open);

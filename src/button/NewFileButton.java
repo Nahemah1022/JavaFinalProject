@@ -6,7 +6,6 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -26,7 +25,6 @@ public class NewFileButton extends JButton {
 	
 	private static final long serialVersionUID = 1L;
 	private boolean isSet;
-	private Menu menu;
 	
 	public NewFileButton(String name, EditArea source, Menu menu) throws IOException {
 		super(name);

@@ -1,0 +1,40 @@
+#My first Notibility note (change me!)
+
+
+> This note is yours, feel free to play around.
+> Type on the left :arrow_left: and see the rendered result on the right.
+
+##Where do I start?
+
+###Step 1: Change the title and add a tag
+
+- [ ] Create my first HackMD note (this one!)
+- [ ] Change its title
+- [ ] Add a tag
+
+
+
+##Step 2: Write something in Markdown
+
+Let's try it out!
+Apply different styling to this paragraph:
+**HackMD gets everyone on the same page with Markdown.** ==Real-time collaborate on any documentation in markdown.== Capture fleeting ideas and formalize tribal knowledge.
+
+*Bold*
+**Italic**
+Sub~script~
+~~Crossed~~
+==Highlight==
+
+:::info
+
+Hint: You can also apply styling from the toolbar at the top of the editing area.
+
+:::
+
+> Drag-n-drop image from your file system to the editor to paste it!
+
+
+Want to learn more? ➜ [HackMD Tutorials](https://hackmd.io/c/tutorials) 
+
+

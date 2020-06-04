@@ -1,0 +1,19 @@
+#Collect your documents with a book
+
+View the book with "Book Mode".
+
+### Examples
+
+---
+
+[Book example](https://hackmd.io/s/book-example)
+[Slide example](https://hackmd.io/s/slide-example)
+[YAML metadata](https://hackmd.io/s/yaml-metadata)
+[Features](https://hackmd.io/s/features)
+
+### Themes
+
+---
+
+[Dark theme](https://hackmd.io/theme-dark?both)
+[Vertical alignment](https://hackmd.io/theme-vertical-writing?both)

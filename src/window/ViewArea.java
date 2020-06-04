@@ -1,24 +1,37 @@
 package window;
 
-import java.awt.Color;
 import java.awt.Font;
-import java.io.IOException;
 
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JTextPane;
 import javax.swing.text.BadLocationException;
-import javax.swing.text.DefaultHighlighter;
 import javax.swing.text.Document;
-import javax.swing.text.Highlighter;
 import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
 import javax.swing.text.StyledDocument;
 
-import button.TagButton;
-
-import tokenTag.*;
+import tokenTag.BoldTag;
+import tokenTag.CheckboxTag;
+import tokenTag.CodeTag;
+import tokenTag.Comment;
+import tokenTag.DangerTag;
+import tokenTag.DividerTag;
+import tokenTag.FontTag;
+import tokenTag.HyperLinkTag;
+import tokenTag.ImageTag;
+import tokenTag.InfoTag;
+import tokenTag.Irr_Order;
+import tokenTag.Irregular_Order;
+import tokenTag.ItalicTag;
+import tokenTag.MarkdownTag;
+import tokenTag.Quote;
+import tokenTag.StrikeTag;
+import tokenTag.SuccessTag;
+import tokenTag.TableTag;
+import tokenTag.TitleTag;
+import tokenTag.UnderLabel;
+import tokenTag.UnderlineTag;
+import tokenTag.WarningTag;
 
 public class ViewArea extends JTextPane {
 	

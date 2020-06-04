@@ -1,0 +1,53 @@
+#Project Title
+
+![](D:\file\example\project.png)
+
+##Table of Contents
+-  Project Title
+	-  Table of Contents
+	-  Beginners Guide
+	-  User story
+	-  User flows
+	-  Project Timeline
+	-  Appendix and FAQ
+
+
+##Beginners Guide
+
+If you are a total beginner to this, start here!
+
+1. Select a workspace
+2. Choose a file
+3. Start writing note!
+
+> Read more about Gherkin here: 
+[link](https://docs.cucumber.io/gherkin/reference/)
+
+
+
+##User flows
+
+> Read more about sequence-diagrams here: 
+[link](http://bramp.github.io/js-sequence-diagrams/)
+
+
+
+
+##Project Timeline
+
+> Read more about mermaid here: 
+[link](http://mermaid-js.github.io/mermaid/)
+
+
+
+
+
+##Appendix and FAQ
+
+:::info
+Find this document incomplete? 
+Leave a comment!
+
+:::
+
+

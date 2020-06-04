@@ -1,0 +1,43 @@
+#JavaScript 開發技巧
+---=
+
+####Chapter 1：簡介JavaScrpit
+
+######JavaScript是**程序導向**的程式語言
+
+-  function是==**最高等物件**==
+	-  function ➔ 函式
+	-  function closure ➔ 函式閉包
+-  有variable scope的概念
+-  基於原型的物件導向概念
+
+---=
+####Chapter 2：網頁的生成與執行
+
+:::success
+瀏覽器接收HTML代碼來建立DOM Tree
+再透過JavaScript動態修改DOM結構
+:::
+
+######網頁的生命週期
+
+-  STEP1: **Server端**
+	-  輸入網址，向Server請求回應
+
+-  STEP2: **頁面建立**
+	-  設置使用者介面
+
+-  STEP3: **事件處裡**
+	-  啟用Event Handler，進入[Event Loop](https://en.wikipedia.org/wiki/Event_loop)
+
+-  STEP4: **關閉網頁**
+	-  使用者關閉網頁，生命週期結束![]
+
+![](eventLoop.jpg)
+
+######DOM Tree：HTML元件的結構化表示
+:::info
+HTML代碼就是DOM的建立藍圖==
+:::
+
+![](DOM.png)

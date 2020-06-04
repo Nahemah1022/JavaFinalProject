@@ -20,7 +20,7 @@ public class TableTag extends TokenTag {
 	@Override
 	public void apply() throws BadLocationException {
 		String str = this.doc.getText(0, this.doc.getLength());
-		int isTable = 1, num1 = 0, num2 = 0, linenum = 0, subnum = 0;
+		int isTable = 1, num1 = 0, num2 = 0, linenum = 0;
 		for(int i=str.indexOf(this.startToken), j=str.indexOf(this.endToken, i+1); 
 				i!=-1 && j!=-1; 
 				i=str.indexOf(this.startToken, j+1), j=str.indexOf(this.endToken, i+1)) {

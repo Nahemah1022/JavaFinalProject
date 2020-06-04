@@ -13,6 +13,8 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
 import javax.swing.text.StyledDocument;
 
+import window.Menu;
+
 public class ImageTag extends TokenTag {
 	
 	Style def = StyleContext.getDefaultStyleContext().
@@ -33,9 +35,15 @@ public class ImageTag extends TokenTag {
 				i=str.indexOf(this.startToken, j+1-subnum), j=str.indexOf(this.endToken, i+1)) {
 			subnum = 0;
 			
-			String path = str.substring(i+4, j);
-			//JCheckBox chk = new JCheckBox(str.substring(i+4, j));
-			//StyleConstants.setComponent(s, chk);
+			String path;
+			
+			if(Menu.workspacePath.isEmpty()) {
+				path = str.substring(i+4, j);
+			}
+			else {
+				path = Menu.workspacePath + "\\" + str.substring(i+4, j);
+			}
+
 			try {
 				Image image = ImageIO.read(new File(path));
 				BufferedImage bimg = ImageIO.read(new File(path));
@@ -48,7 +56,6 @@ public class ImageTag extends TokenTag {
 				));
 				label.setName(path);
 				StyleConstants.setComponent(s, label);
-				//System.out.println("name: "+StyleConstants.getComponent(s));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
