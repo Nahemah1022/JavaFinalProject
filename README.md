@@ -3,9 +3,7 @@ Java final project in 2020 Spring
 # JavaFinalProject
 Java final project in 2020 Spring
 
-## 功能介紹
-
-#### 語法
+## 語法介紹
 
 ```
 # text                          :   標題
@@ -29,7 +27,12 @@ text                            :   區塊(info,warning,success,danger)
 
 ```
 
-#### 介面操作
+## 介面操作
 
+![](./demo.png)
+
+上方按鈕從左到右依序為:<br>
+開啟工作室、存檔、載入檔案、<br>
+粗體、斜體、刪除線、代辦事項、超連結、圖片、無序清單、引用<br>
 
 
