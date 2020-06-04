@@ -2,19 +2,17 @@ package tokenTag;
 
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Style;
-import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
 import javax.swing.text.StyledDocument;
 
-public class ItalicTag extends TokenTag {
+public class Irr_Order extends TokenTag {
 
-	public ItalicTag(StyledDocument target, String start, String end) {
+	public Irr_Order(StyledDocument target, String start, String end) {
 		super(target, start, end);
 		
         Style def = StyleContext.getDefaultStyleContext().
                 getStyle(StyleContext.DEFAULT_STYLE);
-		Style s = doc.addStyle("italic", def);
-		StyleConstants.setItalic(s, true);
+		doc.addStyle("s_irregular", def);
 	}
 
 	@Override
@@ -23,17 +21,17 @@ public class ItalicTag extends TokenTag {
 		int subnum = 0;
 		for(int i=str.indexOf(this.startToken), j=str.indexOf(this.endToken, i+1); 
 				i!=-1 && j!=-1; 
-				i=str.indexOf(this.startToken, j+1 - subnum), j=str.indexOf(this.endToken, i+1)) {
+				i=str.indexOf(this.startToken, j+1-subnum), j=str.indexOf(this.endToken, i+1)) {
 			subnum = 0;
-			doc.setCharacterAttributes(i, j-i+1, this.doc.getStyle("italic"), true);
-			doc.remove(i, this.startToken.length());
+			doc.setCharacterAttributes(i, j-i+1, this.doc.getStyle("s_irregular"), true);
+			doc.remove(i+1, this.startToken.length()-1);
+			doc.insertString(i+1, "¡C", doc.getStyle("s_irregular"));
 			subnum += this.startToken.length();
-			if(this.endToken.equals("\n") == false) {
+			if(this.endToken != "\n") {
 				doc.remove(j-this.startToken.length(), this.endToken.length());
-				subnum += this.endToken.length();
-			} 
+				subnum += this.startToken.length();
+			}
 			str = this.doc.getText(0, this.doc.getLength());
 		}
 	}
-
 }

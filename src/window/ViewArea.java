@@ -1,5 +1,7 @@
+package window;
 
 import java.awt.Font;
+import java.io.IOException;
 
 import javax.swing.JTextPane;
 import javax.swing.text.BadLocationException;
@@ -9,9 +11,10 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
 import javax.swing.text.StyledDocument;
 
+import button.TagButton;
 import tokenTag.*;
 
-public class ViewArea extends JTextPane{
+public class ViewArea extends JTextPane {
 	
 	private static final long serialVersionUID = 1L;
 
@@ -21,16 +24,38 @@ public class ViewArea extends JTextPane{
 	private TitleTag title;
 	private BoldTag bold;
 	private ItalicTag italic;
+	private HyperLinkTag hyperlink;
+	private MarkdownTag markdown;
+	private CheckboxTag checkbox;
+	private TableTag table;
+
+	private UnderlineTag underline;
+	private Quote quote;
+	private Comment comment;
+	private Irregular_Order f_irregular;
+	private Irr_Order s_irregular;
+	private UnderLabel Ulabel;
 	
-	ViewArea(Document source){
+	ViewArea(EditArea editArea) throws IOException{
 		setFont(new Font("Arial", Font.BOLD, 20));
 		setOpaque(true);
 		setEditable(false);
+		setContentType("tekst/html");
 		
         StyledDocument doc = getStyledDocument();
         title = new TitleTag(doc, "#", "\n");
         bold = new BoldTag(doc, "*", "*");
         italic = new ItalicTag(doc, "**", "**");
+        hyperlink = new HyperLinkTag(doc, "[", ")");
+        markdown = new MarkdownTag(doc, "==", "==");
+        checkbox = new CheckboxTag(doc, "- [ ]", "\n");
+        table = new TableTag(doc, "|", "-|\n");
+        underline = new UnderlineTag(doc, "_","_");
+        quote = new Quote(doc, ">","\n");
+        comment = new Comment(doc,"//","\n");
+        s_irregular = new Irr_Order(doc,"	- ","\n");
+        f_irregular = new Irregular_Order(doc,"- ","\n");
+        Ulabel = new UnderLabel(doc,"~","~");
         addStylesToDocument(doc);
 	}
 	
@@ -39,7 +64,6 @@ public class ViewArea extends JTextPane{
                 getStyle(StyleContext.DEFAULT_STYLE);
         StyleConstants.setFontFamily(def, "SansSerif");
         StyleConstants.setBold(def, false);
-        
 		Style s = doc.addStyle("regular", def);
 		StyleConstants.setBold(s, false);
 	}
@@ -47,11 +71,23 @@ public class ViewArea extends JTextPane{
 	public void setViewText(Document source) throws BadLocationException {
 		String str = source.getText(0, source.getLength());
 		StyledDocument doc = getStyledDocument();
+		//System.out.println(str.length() - doc.getLength());
 		doc.remove(0, doc.getLength());
 		doc.insertString(0, str, doc.getStyle("regular"));
 		
 		title.apply();
 		italic.apply();
 		bold.apply();
+		checkbox.apply();
+		hyperlink.apply();
+		markdown.apply();
+		table.apply();
+		underline.apply();
+		quote.apply();
+		comment.apply();
+		s_irregular.apply();
+		f_irregular.apply();
+		Ulabel.apply();
+		
 	}
 }
